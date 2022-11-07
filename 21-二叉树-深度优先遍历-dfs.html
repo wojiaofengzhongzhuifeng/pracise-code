@@ -49,18 +49,18 @@
 
   function 先序(tree){
     console.log(tree.val)
-    tree.left && dfs(tree.left)
-    tree.right && dfs(tree.right)
+    tree.left && 先序(tree.left)
+    tree.right && 先序(tree.right)
   }
   function 中序(tree){
-    tree.left && dfs(tree.left)
+    tree.left && 中序(tree.left)
     console.log(tree.val)
-    tree.right && dfs(tree.right)
+    tree.right && 中序(tree.right)
   }
   function 后序(tree){
-    tree.left && dfs(tree.left)
+    tree.left && 后序(tree.left)
     console.log(tree.val)
-    tree.right && dfs(tree.right)
+    tree.right && 后序(tree.right)
   }
 
 
