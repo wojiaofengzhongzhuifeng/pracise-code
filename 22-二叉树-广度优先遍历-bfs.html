@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+
+  const tree = {
+    val: 'a',
+    left: {
+      val: 'a-1',
+      left: {
+        val: 'a-1-1'
+      },
+      right: {
+        val: 'a-1-2'
+      }
+    },
+    right: {
+      val: 'a-2',
+      left: {
+        val: 'a-2-1'
+      },
+      right: {
+        val: 'a-2-2'
+      }
+    }
+  }
+
+  const bfs = (tree)=>{
+    const queue = [tree]
+    while(queue.length > 0){
+      const needTodo = queue.shift()
+      console.log(needTodo.val);
+      needTodo.left && queue.push(needTodo.left)
+      needTodo.right && queue.push(needTodo.right)
+    }
+  }
+
+  bfs(tree)
+
+
+</script>
+</body>
+</html>

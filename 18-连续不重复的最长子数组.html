@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+  // 方法1 ：使用集合数据结构解决
+  function getNumber(array){
+
+    let currentChar = ''
+    let count = 0
+    let map = {}
+    let countList = []
+    array.forEach((char)=>{
+      if(!map[char]){
+        map[char] = 1
+        count += 1
+      } else {
+        if(currentChar === char){
+          countList.push(count)
+          count = 0
+          map = {}
+        } else {
+          count += 1
+        }
+      }
+      currentChar = char
+    })
+    console.log(countList);
+    return count
+  }
+
+  // 方法2：使用双指针维护一个滑动窗口，用来剪切子串
+  // 不理解这种方法
+  function getNumber1(s){
+    let l = 0
+    let res = 0
+    const map = new Map()
+    for(let r=0;r<=s.length - 1;r++){
+      if(map.has(s[r]) && map.get(s[r]) >= l){
+        l = map.get(s[r]) + 1
+      }
+      res = Math.max(res, r - l + 1)
+      map.set(s[r], r)
+    }
+    return res
+  }
+  console.log(getNumber1((['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b'])))
+
+
+  // ['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b']，预期结果是：5 'b', 'c', 'd', 'e' ,'b'
+  // console.log(getNumber(['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b']))
+
+  // console.assert(getNumber(['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b']) === 5)
+</script>
+</body>
+</html>

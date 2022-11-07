@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+  // ['a', 'b', 'c', 'a', 'a']  a=>3次
+
+  function findMaxCharAndIndex (array){
+    let map = {}
+    array.forEach((char)=>{
+      if(!map[char]){
+        map[char] = 1
+      } else {
+        map[char] += 1
+      }
+    })
+
+    let maxChar = ''
+    let maxCountNumber = 0
+    for(let key in map){
+      const counNumber = map[key]
+      if(counNumber > maxCountNumber){
+        maxCountNumber = counNumber
+        maxChar = key
+      }
+    }
+    return [maxChar, maxCountNumber]
+  }
+
+  console.log(findMaxCharAndIndex(['a', 'b', 'c', 'a', 'a']));
+  console.assert(JSON.stringify(findMaxCharAndIndex(['a', 'b', 'c', 'a', 'a'])) === JSON.stringify(['a', 3]))
+</script>
+</body>
+</html>

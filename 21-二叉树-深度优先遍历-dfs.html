@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // 哪个才是对的？
+
+  const tree = {
+    val: 'a',
+    left: {
+      val: 'a-1',
+      left: {
+        val: 'a-1-1'
+      },
+      right: {
+        val: 'a-1-2'
+      }
+    },
+    right: {
+      val: 'a-2',
+      left: {
+        val: 'a-2-1'
+      },
+      right: {
+        val: 'a-2-2'
+      }
+    }
+  }
+
+  function dfs(tree){
+    console.log(tree.val)
+    tree.left && dfs(tree.left)
+    tree.right && dfs(tree.right)
+  }
+
+  // 由于二叉树的特殊数据结构，因此存在如下的遍历方式
+  /*
+  *
+  * 先序：根-左-右
+    中序：左-根-右
+    后续：左-右-根
+  * */
+
+  function 先序(tree){
+    console.log(tree.val)
+    tree.left && dfs(tree.left)
+    tree.right && dfs(tree.right)
+  }
+  function 中序(tree){
+    tree.left && dfs(tree.left)
+    console.log(tree.val)
+    tree.right && dfs(tree.right)
+  }
+  function 后序(tree){
+    tree.left && dfs(tree.left)
+    console.log(tree.val)
+    tree.right && dfs(tree.right)
+  }
+
+
+
+
+
+  // 先序(tree)
+  // console.log('---');
+  中序(tree)
+  console.log('---');
+  // 后序(tree)
+  // console.log('---');
+
+
+
+
+
+  // 先序深度优先
+  function 先序1(rootNode) {
+    if (!rootNode) {
+      return null;
+    }
+    console.log(rootNode.val);
+    先序1(rootNode.left);
+    先序1(rootNode.right);
+  }
+
+  // 中序深度
+  function 中序1(rootNode) {
+    if (!rootNode) {
+      return null;
+    }
+    中序1(rootNode.left);
+    console.log(rootNode.val);
+    中序1(rootNode.right);
+  }
+
+  // 后序深度
+  function 后序1(rootNode) {
+    if (!rootNode) {
+      return null;
+    }
+    后序1(rootNode.left);
+    后序1(rootNode.right);
+    console.log(rootNode.val);
+  }
+
+  // 先序1(tree)
+  // console.log('---');
+  中序1(tree)
+  // console.log('---');
+  // 后序1(tree)
+
+
+</script>
+</body>
+</html>

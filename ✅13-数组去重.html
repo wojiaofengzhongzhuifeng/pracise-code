@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  let array = [1,2,6,7,8, 1, 3, 4]
+  function unique(array){
+    let map = new Map()
+    let result = []
+    for(let i=0;i<=array.length - 1;i++){
+      let key = array[i]
+
+      if(!map.get(key)){
+        map.set(key, 1)
+      } else {
+        map.set(key, map.get(key) + 1)
+      }
+    }
+    for(let key of map){
+      result.push(key[0])
+    }
+    return result
+  }
+
+  console.log(unique(array));
+  console.assert(JSON.stringify(unique(array)) === JSON.stringify([1,2,6,7,8, 3, 4]))
+</script>
+</body>
+</html>

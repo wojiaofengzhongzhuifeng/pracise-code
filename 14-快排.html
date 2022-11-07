@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // function quickSort(array){
+  //
+  //
+  //   if(array.length === 0){return array}
+  //   let temp = array[0]
+  //   let leftArray = []
+  //   let rightArray = []
+  //   let resultArray = []
+  //   array.forEach((number, index)=>{
+  //     if(index === 0){return}
+  //     if(number >= temp){
+  //       rightArray.push(number)
+  //     } else {
+  //       leftArray.push(number)
+  //     }
+  //   })
+  //   resultArray = quickSort(leftArray).concat(temp).concat(quickSort(rightArray))
+  //   return resultArray
+  // }
+
+  function quickSort(array){
+    let temp = array[0]
+    if(temp === undefined){return []} // 核心代码：特殊情况：空数组，直接返回空数组即可
+    let leftArray = []
+    let rightArray = []
+
+    array.forEach((number, index)=>{
+      if(index === 0){return} // 核心代码
+      if(number >=temp){
+        rightArray.push(number)
+      } else{
+        leftArray.push(number)
+      }
+    })
+    return quickSort(leftArray).concat(temp).concat(quickSort(rightArray))
+  }
+
+
+  const array = [1,4,3,2,5, 10 ,8]
+
+
+  console.log(quickSort(array));
+  console.assert(JSON.stringify(quickSort(array)) === JSON.stringify([1,2,3,4,5,8,10]))
+</script>
+</body>
+</html>
