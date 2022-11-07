@@ -14,6 +14,7 @@
 
   function findMaxCharAndIndex (array){
     let map = {}
+    let result = {}
     array.forEach((char)=>{
       if(!map[char]){
         map[char] = 1
@@ -22,20 +23,32 @@
       }
     })
 
-    let maxChar = ''
+    // let maxChar = ''
     let maxCountNumber = 0
     for(let key in map){
       const counNumber = map[key]
       if(counNumber > maxCountNumber){
         maxCountNumber = counNumber
-        maxChar = key
+        // maxChar = key
       }
     }
-    return [maxChar, maxCountNumber]
+
+    Object.keys(map).filter((char)=>{
+      let number = map[char]
+      if(number === maxCountNumber){
+        return true
+      }
+    }).map((char)=>{
+      result[char] = maxCountNumber
+
+    })
+    return result
+
+
   }
 
-  console.log(findMaxCharAndIndex(['a', 'b', 'c', 'a', 'a']));
-  console.assert(JSON.stringify(findMaxCharAndIndex(['a', 'b', 'c', 'a', 'a'])) === JSON.stringify(['a', 3]))
+  console.log(findMaxCharAndIndex(['a', 'b', 'c', 'a', 'a', 'b', 'b']));
+  console.assert(JSON.stringify(findMaxCharAndIndex(['a', 'b', 'c', 'a', 'a', 'b', 'b'])) === JSON.stringify({a: 3, b: 3}))
 </script>
 </body>
 </html>
