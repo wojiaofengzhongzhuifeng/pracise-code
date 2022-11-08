@@ -47,8 +47,33 @@
 
   }
 
-  console.log(findMaxCharAndIndex(['a', 'b', 'c', 'a', 'a', 'b', 'b']));
-  console.assert(JSON.stringify(findMaxCharAndIndex(['a', 'b', 'c', 'a', 'a', 'b', 'b'])) === JSON.stringify({a: 3, b: 3}))
+  function _findMaxCharAndIndex(array){
+    let map = new Map()
+    array.forEach((char)=>{
+      if(!map.has(char)){
+        map.set(char, 1)
+      } else {
+        map.set(char, map.get(char) + 1)
+      }
+    })
+
+
+    let maxCount = 0
+    map.forEach((value)=>{
+      maxCount = Math.max(value, maxCount)
+    })
+
+    let result = {}
+    map.forEach((value, key)=>{
+      if(value === maxCount){
+        result[key] = value
+      }
+    })
+    return result
+  }
+
+  console.log(_findMaxCharAndIndex(['a', 'b', 'c', 'a', 'a', 'b', 'b']));
+  console.assert(JSON.stringify(_findMaxCharAndIndex(['a', 'b', 'c', 'a', 'a', 'b', 'b'])) === JSON.stringify({a: 3, b: 3}))
 </script>
 </body>
 </html>
