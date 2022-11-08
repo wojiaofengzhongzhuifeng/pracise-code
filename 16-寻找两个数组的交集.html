@@ -27,7 +27,7 @@
   核心流程：
   1. 对array1, array2 做排序
   2. 分别遍历 array1 ,array2，做数值大小比较
-    2.1 两者相同，两个指针右移
+    2.1 两者相同，推送数值到result数组，同时两个指针右移
     2.2 array1 指针大于 array2 指针，，array2 指针右移
     2.3 array1 指针小于 array2 指针，，array1 指针右移
   */
@@ -56,9 +56,36 @@
     console.log(result)
   }
 
+  function _arrayMerge(array1, array2){
 
-  console.log(arrayMerge([1,2,2,1], [2,2,]));
-  console.log(arrayMerge([4,9,5], [9,4,9,8,4]));
+    array1.sort()
+    array2.sort()
+    let result = []
+
+    let p1 = 0
+    let p2 = 0
+
+    while(p1 < array1.length && p2 < array2.length){
+      let number1 = array1[p1]
+      let number2 = array2[p2]
+      if(number1 ===number2){
+        result.push(number1)
+        p1++
+        p2++
+      } else if(number1 > number2){
+        p2++
+      }else if(number1 < number2){
+        p1++
+      }
+
+
+    }
+    return result
+  }
+
+
+  console.log(_arrayMerge([1,2,2,1], [2,2,]));
+  // console.log(_arrayMerge([4,9,5], [9,4,9,8,4]));
 
 </script>
 </body>
