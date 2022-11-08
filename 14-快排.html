@@ -29,14 +29,17 @@
   //   return resultArray
   // }
 
+  // 递归: 先完成第一层实现，在完成递归，注意确定递归的结束条件
+
+
   function quickSort(array){
     let temp = array[0]
-    if(temp === undefined){return []} // 核心代码：特殊情况：空数组，直接返回空数组即可
+    if(temp === undefined){return []} // 边界情况，递归的退出条件：空数组，直接返回空数组即可，表示不对这个情况进行排序
     let leftArray = []
     let rightArray = []
 
     array.forEach((number, index)=>{
-      if(index === 0){return} // 核心代码
+      if(index === 0){return} // 核心代码： 跳过index === 0 的情况
       if(number >=temp){
         rightArray.push(number)
       } else{
@@ -47,11 +50,11 @@
   }
 
 
-  const array = [1,4,3,2,5, 10 ,8]
+  const array = [1,4,3,2,5, 10, 2,8]
 
 
   console.log(quickSort(array));
-  console.assert(JSON.stringify(quickSort(array)) === JSON.stringify([1,2,3,4,5,8,10]))
+  console.assert(JSON.stringify(quickSort(array)) === JSON.stringify([1,2,2, 3,4,5,8,10]))
 </script>
 </body>
 </html>
