@@ -9,15 +9,57 @@
 </head>
 <body>
 <script>
-  function arrayMerge(array1, array2){
-    return array1.filter((item)=>{
-      if(array2.includes(item)){
-        return true
-      }
-    })
+
+
+  /*
+  使用分离双指针解决
+  分离双指针的代码模版：
+
+  let array1Point = 0
+  let array2Point = 0
+
+  while (array1Point < array1.length && array2Point < array2.length){
+    if(条件1){
+    } else if (条件2){
+    } else if (条件3){}
   }
 
+  核心流程：
+  1. 对array1, array2 做排序
+  2. 分别遍历 array1 ,array2，做数值大小比较
+    2.1 两者相同，两个指针右移
+    2.2 array1 指针大于 array2 指针，，array2 指针右移
+    2.3 array1 指针小于 array2 指针，，array1 指针右移
+  */
+
+  function arrayMerge(array1, array2){
+    array1.sort()
+    array2.sort()
+    let array1Point = 0
+    let array2Point = 0
+    let result = []
+
+    while (array1Point < array1.length && array2Point < array2.length){
+      if(array1[array1Point] === array2[array2Point]){
+        // 两者相同情况
+        result.push(array1[array1Point])
+
+        array1Point += 1
+        array2Point += 1
+      } else if (array1[array1Point] < array2[array2Point]){
+        array1Point += 1
+      } else if (array1[array1Point] > array2[array2Point]){
+        array2Point += 1
+      }
+    }
+
+    console.log(result)
+  }
+
+
   console.log(arrayMerge([1,2,2,1], [2,2,]));
+  console.log(arrayMerge([4,9,5], [9,4,9,8,4]));
+
 </script>
 </body>
 </html>

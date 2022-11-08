@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // https://leetcode.cn/problems/valid-palindrome/
+  /*
+  使用对撞双指针的思路解决
+  * */
+
+  function isRevertString(string){
+    let leftPoint = 0
+    let rightPoint = string.length - 1
+    let flag = true
+
+    while (leftPoint< rightPoint){
+      let leftChar = string[leftPoint]
+      let rightChar = string[rightPoint]
+
+      if(leftChar === rightChar ){
+        leftPoint +=1
+        rightPoint -=1
+      } else if (leftChar !== rightChar){
+        flag = false
+        break
+      }
+    }
+    return flag
+  }
+
+
+
+  console.log(isRevertString('amanaplanacanalpanama'))
+  console.log(isRevertString('raceacar'))
+  console.log(isRevertString(' '))
+
+
+
+  console.assert(isRevertString('amanaplanacanalpanama') === true)
+  console.assert(isRevertString('raceacar') === false)
+  console.assert(isRevertString(' ') === true)
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
+  /*
+  使用快慢双指针解决，这道题初见有些奇怪，本质上是希望 把不重复的数据 放到开头
+  1. 使用快慢指针分别记录数组item
+  2. 如果慢指针与快指针的数字一样，不需要做任何操作，因为这种情况下，慢指针的位置和值都不需要变更
+  3. 如果慢指针与快指针的数字不一样，需要
+    3.1 慢指针位置 + 1
+    3.2 最新的慢指针位置的值设置为当前快指针的值
+
+  */
+  function remove(array){
+    if(array.length <= 1){return array.length}
+    let slowPoint = 0
+    let fastPoint = 1
+    while(fastPoint < array.length){
+      let slowNumber = array[slowPoint]
+      let fastNumber = array[fastPoint]
+      if(slowNumber !== fastNumber){
+        slowPoint += 1
+        array[slowPoint] = fastNumber
+      }
+      fastPoint += 1
+    }
+    return slowPoint + 1
+  }
+
+  console.log(remove([0,0,1,1,1,2,2,3,4]))
+
+
+
+</script>
+</body>
+</html>
