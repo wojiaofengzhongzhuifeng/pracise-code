@@ -11,9 +11,42 @@
 <script>
 
 
-
+  function isUnque(array) {
+    return (new Set(array)).size === array.length;
+  }
 
   // ['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b']，预期结果是：4 'b', 'c', 'd', 'e'
+  function getNumber(array){
+
+
+    let left = 0
+    let right = 0
+    let resultNumber = 0
+    let windowArray = []
+    let resultArray = []
+
+    while(right < array.length){
+      windowArray.push(array[right])
+
+      while(!isUnque(windowArray)){
+        windowArray.shift()
+        left++
+      }
+
+      if(windowArray.length >= resultNumber){
+        resultNumber = windowArray.length
+        resultArray = windowArray
+      }
+      // resultNumber = Math.max(resultNumber, windowArray.length)
+
+      right++
+    }
+
+    console.log('resultNumber', resultNumber);
+    console.log('resultArray', resultArray);
+
+  }
+  console.log(getNumber((['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b'])))
 
 </script>
 </body>

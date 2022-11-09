@@ -37,27 +37,45 @@
   }
 
   // 方法2：使用双指针维护一个滑动窗口，用来剪切子串
-  // 不理解这种方法
-  function getNumber1(s){
-    let l = 0
-    let res = 0
-    const map = new Map()
-    for(let r=0;r<=s.length - 1;r++){
-      if(map.has(s[r]) && map.get(s[r]) >= l){
-        l = map.get(s[r]) + 1
+  function getNumber1(array){
+    let left = 0
+    let right = 0
+    let windowArray = []
+    let preChar = ''
+    let resultNumber = 0
+    let resultArray = []
+
+
+    while(right < array.length){
+      windowArray.push(array[right])
+      while(windowArray[windowArray.length - 1] === preChar){
+        windowArray.shift()
+        left++
       }
-      res = Math.max(res, r - l + 1)
-      map.set(s[r], r)
+      // if(windowArray.length < resultNumber){
+      //   resultArray = windowArray
+      // }
+      // console.log(windowArray.length);
+        // console.log(resultNumber);
+      if(windowArray.length > resultNumber){
+        resultNumber = windowArray.length
+        resultArray = windowArray
+      }
+      // resultNumber = Math.max(resultNumber, windowArray.length)
+      preChar = windowArray[windowArray.length - 1]
+      right++
     }
-    return res
+    console.log('resultNumber', resultNumber);
+    console.log('resultArray', resultArray);
+
   }
-  console.log(getNumber((['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b'])))
+  console.log(getNumber1((['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b'])))
 
 
   // ['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b']，预期结果是：5 'b', 'c', 'd', 'e' ,'b'
   // console.log(getNumber(['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b']))
 
-  console.assert(getNumber(['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b']) === 5)
+  // console.assert(getNumber(['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b']) === 5)
 </script>
 </body>
 </html>
