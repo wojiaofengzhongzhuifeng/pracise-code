@@ -12,6 +12,7 @@
   // https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/
   /*
   使用对撞双指针的思路解决
+  0. 数组已经排好序！
   1. leftPoint = 0;rightPoint = array.length - 1
   2. 将 array[leftPoint] 与 array[rightPoint] 相加得到 tempSum
     2.1 如果tempSum大于target ，说明需要减小 tempSum , 那么将 rightPoint - 1

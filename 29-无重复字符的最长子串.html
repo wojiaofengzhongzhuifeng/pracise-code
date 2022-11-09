@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+  /*
+  * https://leetcode.cn/problems/longest-substring-without-repeating-characters/
+  * 3. 无重复字符的最长子串
+  * */
+
+  function isUnque(array){
+    return new Set(array).size === array.length
+  }
+
+  function lengthOfLongestSubstring(s){
+    let left = 0
+    let right = 0
+    let resultNumber = 0
+    let windowArray = []
+
+    while(right < s.length){
+      windowArray.push(s[right])
+
+      while(!isUnque(windowArray)){
+        windowArray.shift()
+        left++
+      }
+
+      resultNumber = Math.max(resultNumber, windowArray.length)
+
+      right++
+    }
+    return resultNumber
+  }
+
+  console.assert(lengthOfLongestSubstring('abcabcbb') === 3)
+  console.assert(lengthOfLongestSubstring('bbbbb') === 1)
+  console.assert(lengthOfLongestSubstring('pwwkew') === 3)
+
+</script>
+</body>
+</html>
