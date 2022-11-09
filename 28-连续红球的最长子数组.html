@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<img src="./.readme_images/7092733c.png" alt="">
+<script>
+  /*
+  获取最大红球的数量，0 表示白球；1 表示红球
+  [1, 0, 1, 1, 1, 0, 0, 1, 1, 1,1, 0, 0, ] 应该返回 4
+  */
+  function getMaxLength(array){
+    let left = 0
+    let right = 0
+    let currentReulstArray = []
+    let resultNumber = 0
+    while(right < array.length){
+      currentReulstArray.push(array[right])
+
+      while(currentReulstArray.filter((num)=>num === 0).length !== 0){
+        currentReulstArray.shift()
+        left ++
+      }
+      resultNumber = Math.max(resultNumber, currentReulstArray.length)
+      right++
+    }
+    return resultNumber
+  }
+
+
+
+  console.assert(getMaxLength([1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0,]) === 4);
+  console.assert(getMaxLength([0]) === 0);
+  console.assert(getMaxLength([1]) === 1);
+
+</script>
+</body>
+</html>
