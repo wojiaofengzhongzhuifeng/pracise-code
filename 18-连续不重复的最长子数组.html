@@ -33,7 +33,7 @@
       currentChar = char
     })
     console.log(countList);
-    return count
+    return Math.max(...countList)
   }
 
   // 方法2：使用双指针维护一个滑动窗口，用来剪切子串
@@ -51,13 +51,13 @@
     }
     return res
   }
-  console.log(getNumber1((['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b'])))
+  console.log(getNumber((['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b'])))
 
 
   // ['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b']，预期结果是：5 'b', 'c', 'd', 'e' ,'b'
   // console.log(getNumber(['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b']))
 
-  // console.assert(getNumber(['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b']) === 5)
+  console.assert(getNumber(['a', 'b', 'b','b', 'c', 'd', 'e' ,'b', 'b']) === 5)
 </script>
 </body>
 </html>
