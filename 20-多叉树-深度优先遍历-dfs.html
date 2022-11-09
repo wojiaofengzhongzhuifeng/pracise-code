@@ -21,6 +21,7 @@
   }
 
   const dfs = (root)=>{
+    if(!root){return}
     console.log(root.val)
     root.children && root.children.forEach(dfs)
   }
