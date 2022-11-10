@@ -40,19 +40,6 @@
     }
   }
 
-  function test(tree){
-    let resultNumber = 0
-    function dfs(tree, index){
-      // tree.val && console.log(tree.val, index)
-      resultNumber = Math.max(resultNumber, index)
-      tree.left && dfs(tree.left, index + 1)
-      tree.right && dfs(tree.right, index + 1)
-    }
-    dfs(tree, 1)
-    return resultNumber
-  }
-  console.log(  test(tree))
-  console.assert(test(tree) === 5)
 
 
 </script>
