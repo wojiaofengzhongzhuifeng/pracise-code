@@ -59,7 +59,7 @@
         // console.log(resultNumber);
       if(windowArray.length > resultNumber){
         resultNumber = windowArray.length
-        resultArray = windowArray
+        resultArray = JSON.parse(JSON.stringify(windowArray))
       }
       // resultNumber = Math.max(resultNumber, windowArray.length)
       preChar = windowArray[windowArray.length - 1]

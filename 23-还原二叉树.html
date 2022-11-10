@@ -12,40 +12,65 @@
   const 中序结果 = ['D', 'B', 'G', 'E', 'H', 'J', 'A', 'C', 'I', 'F']
   const 后序结果 = ['D', 'G','J','H','E','B','I','F','C','A']
 
-  function tttt(array1, array2){
-    let index = -1
-    let lastChar = array2[array2.length - 1]
-    let latestArray2 = array2.slice(0, array2.length - 1)
-    for(let i=0;i<=array1.length - 1;i++){
-      if(array1[i] === lastChar){
-        index = i
-      }
-    }
-    if(index === -1 ){
-      tttt(array1, latestArray2)
-    } else {
-      return [index, lastChar, latestArray2]
-    }
-  }
-
-  function revert(array1, array2){
-    if(array1.length === 0){return null}
-    const [index, lastChar, latestArray2] = tttt(array1, array2)
-
-    console.log(index, lastChar, latestArray2);
-
-    let leftArray = index === -1 ? array1.slice(0) : array1.slice(0, index)
-    let rightArray = array1.slice(index + 1)
+  function getObjByArray(array, char){
+    // if(array.filter((arrayChar)=>arrayChar === char).length === 0){return array}
+    let index = array.indexOf(char)
+    if(index === -1){return array}
+    let leftArray = array.slice(0, index)
+    let rightArray = array.slice(index + 1)
     return {
-      val: lastChar,
-      left: revert(leftArray, latestArray2),
-      right: revert(rightArray, latestArray2),
-      // left: leftArray,
-      // right: rightArray,
+      val: char,
+      left: leftArray,
+      right: rightArray,
     }
+
+
   }
 
-  console.log(revert(中序结果, 后序结果));
+  console.log(getObjByArray(['C', 'I', 'F'], 'C'));
+  console.log(getObjByArray(['D', 'B', 'G', 'E', 'H', 'J'], 'C'));
+
+  function test(array1, array2){
+    array2.forEach((char)=>{
+
+    })
+  }
+
+
+  // function tttt(array1, array2){
+  //   let index = -1
+  //   let lastChar = array2[array2.length - 1]
+  //   let latestArray2 = array2.slice(0, array2.length - 1)
+  //   for(let i=0;i<=array1.length - 1;i++){
+  //     if(array1[i] === lastChar){
+  //       index = i
+  //     }
+  //   }
+  //   if(index === -1 ){
+  //     tttt(array1, latestArray2)
+  //   } else {
+  //     return [index, lastChar, latestArray2]
+  //   }
+  // }
+  //
+  // function revert(array1, array2){
+  //   if(array1.length === 0){return null}
+  //   const [index, lastChar, latestArray2] = tttt(array1, array2)
+  //
+  //   console.log(index, lastChar, latestArray2);
+  //
+  //   let leftArray = index === -1 ? array1.slice(0) : array1.slice(0, index)
+  //   let rightArray = array1.slice(index + 1)
+  //   return {
+  //     val: lastChar,
+  //     left: revert(leftArray, latestArray2),
+  //     right: revert(rightArray, latestArray2),
+  //     // left: leftArray,
+  //     // right: rightArray,
+  //   }
+  // }
+  //
+  // console.log(revert(中序结果, 后序结果));
 
 </script>
 </body>
