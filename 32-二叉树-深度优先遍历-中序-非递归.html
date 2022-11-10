@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  /**
+   理解了好久也暂时无法画出具体的流程图，只能参考别人的视线，目前的流程如下：
+   1. 使用指针将二叉树的所有左子节点放到栈
+   2. 取出栈最后一个节点，执行log 操作；并且将指针指向该节点的right，尝试获取right 的所有左子节点，放到栈中准备执行
+   */
+
+  const tree = {
+    val: 'a',
+    left: {
+      val: 'b',
+      left: {
+        val: 'd'
+      },
+      right: {
+        val: 'e',
+        left: {
+          val: 'g'
+        },
+        right: {
+          val: 'h',
+          right: {
+            val: 'j'
+          }
+        }
+      }
+    },
+    right: {
+      val: 'c',
+      right: {
+        val: 'f',
+        left: {
+          val: 'i'
+        }
+      }
+    }
+  }
+
+  function 中序1(treeNode){
+    let p = treeNode
+    let stack = []
+
+    while(p || stack.length ){
+      while(p){
+        stack.push(p)
+        p = p.left // 经常为null
+      }
+      const n = stack.pop()
+      console.log(n.val)
+      p = n.right
+    }
+
+  }
+  console.assert(JSON.stringify(中序1(tree)) === JSON.stringify(['d', 'b', 'g', 'e', 'h', 'j', 'a', 'c', 'i', 'f']))
+
+
+</script>
+</body>
+</html>
