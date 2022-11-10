@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  const tree = {
+    val: 'a',
+    children: [
+      {val: 'a-1', children: [{val: 'a-1-1'}, {val: 'a-1-2'}]},
+      {val: 'a-2', children: [{val: 'a-2-1'}, {val: 'a-2-2'}]},
+      {val: 'a-3', children: [{val: 'a-3-1'}, {val: 'a-3-2'}]},
+    ]
+  }
+
+  function test(tree){
+    let array = [tree]
+    while(array.length !== 0){
+      let treeItem = array.pop()
+      console.log(treeItem.val)
+      treeItem.children && treeItem.children.reverse().forEach((treeItem1)=>{
+        array.push(treeItem1)
+      })
+    }
+  }
+
+  test(tree)
+</script>
+</body>
+</html>
