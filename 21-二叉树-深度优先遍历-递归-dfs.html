@@ -9,8 +9,6 @@
 </head>
 <body>
 <script>
-  // 哪个才是对的？
-
   const tree = {
     val: 'a',
     left: {
@@ -33,12 +31,6 @@
     }
   }
 
-  function dfs(tree){
-    console.log(tree.val)
-    tree.left && dfs(tree.left)
-    tree.right && dfs(tree.right)
-  }
-
   // 由于二叉树的特殊数据结构，因此存在如下的遍历方式
   /*
   *
@@ -59,60 +51,23 @@
   }
   function 后序(tree){
     tree.left && 后序(tree.left)
-    console.log(tree.val)
     tree.right && 后序(tree.right)
+    console.log(tree.val)
   }
 
 
 
 
 
-  // 先序(tree)
-  // console.log('---');
+  先序(tree)
+  console.log('---');
   中序(tree)
   console.log('---');
-  // 后序(tree)
-  // console.log('---');
+  后序(tree)
+  console.log('---');
 
 
 
-
-
-  // 先序深度优先
-  function 先序1(rootNode) {
-    if (!rootNode) {
-      return null;
-    }
-    console.log(rootNode.val);
-    先序1(rootNode.left);
-    先序1(rootNode.right);
-  }
-
-  // 中序深度
-  function 中序1(rootNode) {
-    if (!rootNode) {
-      return null;
-    }
-    中序1(rootNode.left);
-    console.log(rootNode.val);
-    中序1(rootNode.right);
-  }
-
-  // 后序深度
-  function 后序1(rootNode) {
-    if (!rootNode) {
-      return null;
-    }
-    后序1(rootNode.left);
-    后序1(rootNode.right);
-    console.log(rootNode.val);
-  }
-
-  // 先序1(tree)
-  // console.log('---');
-  中序1(tree)
-  // console.log('---');
-  // 后序1(tree)
 
 
 </script>
