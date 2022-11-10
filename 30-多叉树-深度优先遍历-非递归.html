@@ -9,6 +9,8 @@
 </head>
 <body>
 <script>
+
+
   const tree = {
     val: 'a',
     children: [
@@ -19,12 +21,12 @@
   }
 
   function test(tree){
-    let array = [tree]
-    while(array.length !== 0){
-      let treeItem = array.pop()
-      console.log(treeItem.val)
-      treeItem.children && treeItem.children.reverse().forEach((treeItem1)=>{
-        array.push(treeItem1)
+    let stack = [tree]
+    while(stack.length > 0){
+      const needTodo = stack.pop()
+      console.log(needTodo.val)
+      needTodo.children && needTodo.children.reverse().forEach((item)=>{
+        stack.push(item)
       })
     }
   }
