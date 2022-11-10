@@ -8,7 +8,6 @@
   <title>Document</title>
 </head>
 <body>
-<img src=".readme_images/468ca982.png" alt="">
 <script>
   const tree = {
     val: 'a',
@@ -41,39 +40,20 @@
     }
   }
 
-  // 由于二叉树的特殊数据结构，因此存在如下的遍历方式
-  /*
-  *
-  * 先序：根-左-右
-    中序：左-根-右
-    后续：左-右-根
-  * */
-
-  function 先序(tree){
-    console.log(tree.val)
-    tree.left && 先序(tree.left)
-    tree.right && 先序(tree.right)
-  }
-  function 中序(tree){
-    tree.left && 中序(tree.left)
-    console.log(tree.val)
-    tree.right && 中序(tree.right)
-  }
-  function 后序(tree){
-    tree.left && 后序(tree.left)
-    tree.right && 后序(tree.right)
-    console.log(tree.val)
+  function 前序(tree){
+    let array = [tree]
+    let resultArray = []
+    while(array.length>0){
+      const needTodo = array.pop()
+      resultArray.push(needTodo.val)
+      needTodo.right && array.push(needTodo.right)
+      needTodo.left && array.push(needTodo.left)
+    }
+    return resultArray
   }
 
-  console.log(先序(tree));
-  console.log('---');
-  console.log(中序(tree));
-  console.log('---');
-  console.log(后序(tree));
-  console.log('---');
-
-
-
+  console.log(前序(tree));
+  console.assert(JSON.stringify(前序(tree)) === JSON.stringify(['a', 'b', 'd', 'e', 'g', 'h', 'j', 'c', 'f', 'i']))
 
 
 </script>
