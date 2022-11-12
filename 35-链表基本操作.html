@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+
+<script>
+  // 1. 定义链表
+  let a = {
+    val: 'a',
+
+  }
+  let b = {
+    val: 'b',
+  }
+  let c = {
+    val: 'c',
+  }
+  a.next = b
+  b.next = c
+
+  // 2. 遍历链表
+  let p = a
+  while(p){
+    console.log(p.val)
+    p = p.next
+  }
+
+  // 3. 插入
+  let b1 = {
+    val: 'b1'
+  }
+
+  b.next = b1
+  b1.next = c
+  console.log(a)
+
+  // 4. 删除
+  b.next = c
+
+</script>
+</body>
+</html>
