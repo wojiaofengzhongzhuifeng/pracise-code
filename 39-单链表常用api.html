@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+
+<script>
+
+  /*
+  构造出一个单链表类LinkedList，包含 api 如下
+    append(node): 向链表末尾添加元素
+    getElement(index): 获取链表中某个位置的元素
+    remove(start, end)：删除某个区间的所有节点，不包含end位置的节点
+    insertAfter(node, newNode): 在node后面插入节点newNode
+    insertBefore(node, newNode): 在node前面插入节点newNode
+  */
+  class LinedList{
+    constructor(val, next) {
+      this.val = val
+      this.next = next
+    }
+    append = (newNode)=>{
+      let p = this
+      let haveAdd = false
+      while(p && !haveAdd){
+        if(!p.next){
+          // 说明已经到达链表末尾
+          p.next = newNode
+          haveAdd = true
+        }
+        p = p.next
+      }
+    }
+
+    // 遍历链表的值到一个数组
+    getElement = (index)=>{
+      let resultArray = []
+
+      let p = this
+      while(p){
+        resultArray.push(p)
+        p = p.next
+      }
+      let result = resultArray[index]
+      if(result){
+        return result
+      } else {
+        console.error("找不到数据")
+        return undefined
+      }
+    }
+
+    remove = (start, end)=>{
+      let startPreNode = this.getElement(start - 1)
+      if(!startPreNode){return }
+      startPreNode.next = this.getElement(end)
+    }
+
+    insertAfter = (node, newNode)=>{
+      let nextNode = node.next
+      node.next = newNode
+      newNode.next = nextNode
+    }
+
+    insertBefore = (node, newNode)=>{
+
+      // 1. 使用双指针，找到 node 的前一个 node
+      // 双指针遍历
+      let slow = null
+      let fast = this
+      let preNode = null
+      while(fast){
+
+        if(node.val === fast.val){
+          preNode = slow
+        }
+        slow = fast
+        // slow = slow.next
+        fast = fast.next
+      }
+
+      console.log('preNode', preNode);
+
+      // 2. 常规操作
+      preNode && (preNode.next = newNode)
+      newNode.next = node
+    }
+
+  }
+
+  let node1 = new LinedList('a')
+  node1.append(new LinedList('b'))
+  let nodec = new LinedList('c')
+  node1.append(nodec)
+  node1.append(new LinedList('d'))
+  node1.append(new LinedList('e'))
+  console.log('node1', node1); // a -> b -> c -> d -> e
+
+  let result = node1.getElement(1)
+  console.log('result', result);
+
+  node1.remove(1, 2)
+  console.log('node1 remove', node1);  // a -> c -> d -> e
+
+  // 在 c 后插入 c1 node 节点
+  node1.insertAfter(nodec, new LinedList('c1'))
+  console.log('node1 insertAfter', node1);  // a -> c -> c1 -> d -> e
+
+  // 在 c 前插入 c0 node 节点
+  node1.insertBefore(nodec, new LinedList('c0'))
+  console.log('node1 insertBefore', node1);  // a -> c0 -> c -> c1 -> d -> e
+</script>
+</body>
+</html>
