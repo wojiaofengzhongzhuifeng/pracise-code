@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+
+<script>
+
+  function log(fnObj, assetObj){
+    console.log(fnObj)
+    console.assert(JSON.stringify(fnObj) === JSON.stringify(assetObj))
+  }
+
+  // 以下代码用于断言
+  function assetHelper(headNode){
+    let resultArray = []
+    let p = headNode
+    while(p){
+      resultArray.push(p.val)
+      p = p.next
+    }
+    return resultArray
+  }
+
+
+  // https://leetcode.cn/problems/reverse-linked-list/
+  let a = {
+    val: 'a',
+
+  }
+  let b = {
+    val: 'b',
+  }
+  let c = {
+    val: 'c',
+  }
+  let d = {
+    val: 'd'
+  }
+  a.next = b
+  b.next = c
+  c.next = d
+
+  // 【todo】不理解为什么 myRevert 不行
+  function myRevert(node){
+    let slow = node
+    let fast = node.next
+    while (fast){
+      let temp = fast.next
+      fast.next = slow
+      console.log('slowP.val', slow.val)
+      console.log('fastP.val', fast.val)
+      slow = fast
+      fast = temp
+    }
+  }
+  function revert(head){
+    let fast = head
+    let slow = null
+    while(fast){
+      const temp = fast.next
+      fast.next = slow
+      slow = fast
+      fast = temp
+    }
+
+  }
+  debugger
+  myRevert(a)
+  console.log(d)
+
+
+
+  log(assetHelper(d), ['d', 'c', 'b', 'a'])
+
+</script>
+</body>
+</html>

@@ -25,14 +25,25 @@
   a.next = b
   b.next = c
 
-  // 2. 遍历链表
+  // 2. 单指针遍历链表
   let p = a
   while(p){
     console.log(p.val)
     p = p.next
   }
 
-  // 3. 插入
+  // 双指针遍历
+  let slow = a
+  let fast = slow.next
+  while(fast){
+    console.log('slow.val 双指针', slow.val)
+    console.log('fast.val 双指针', fast.val)
+    slow = fast
+    // slow = slow.next
+    fast = fast.next
+  }
+
+  // 3. 插入: a-> b-> b1-> c
   let b1 = {
     val: 'b1'
   }
@@ -41,7 +52,7 @@
   b1.next = c
   console.log(a)
 
-  // 4. 删除
+  // 4. 删除:尝试删除b1 节点，a-> b-> c
   b.next = c
 
 </script>

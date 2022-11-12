@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+
+<script>
+  function log(fnObj, assetObj){
+    console.log(fnObj)
+    console.assert(JSON.stringify(fnObj) === JSON.stringify(assetObj))
+  }
+
+
+  // https://leetcode.cn/problems/delete-node-in-a-linked-list/
+  // 1. 定义链表
+  let a = {
+    val: 'a',
+
+  }
+  let b = {
+    val: 'b',
+  }
+  let c = {
+    val: 'c',
+  }
+  let d = {
+    val: 'd'
+  }
+  a.next = b
+  b.next = c
+  c.next = d
+
+  /*
+  现在想删除 b 节点, 现在只有 b 节点
+  而常规删除操作，想删除某节点，必须要知道这个节点的前一个节点，似乎无法删除，但是我们可以这样
+  a -> b -> c -> d
+  a -> c -> c -> d
+  a -> c ->d
+  * */
+  function remove(node){
+    //
+    node.val = node.next.val
+    node.next = node.next.next
+  }
+  remove(b)
+
+  // 以下代码用于断言
+  function assetHelper(headNode){
+    let resultArray = []
+    let p = headNode
+    while(p){
+      resultArray.push(p.val)
+      p = p.next
+    }
+    return resultArray
+  }
+
+  log(assetHelper(a), ['a', 'c', 'd'])
+
+</script>
+</body>
+</html>
