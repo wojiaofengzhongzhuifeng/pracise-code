@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+
+<script>
+
+  function log(fnObj, assetObj){
+    console.log(fnObj)
+    console.assert(JSON.stringify(fnObj) === JSON.stringify(assetObj))
+  }
+
+  // 以下代码用于断言
+  function assetHelper(headNode){
+    let resultArray = []
+    let p = headNode
+    while(p){
+      resultArray.push(p.val)
+      p = p.next
+    }
+    return resultArray
+  }
+
+
+  // https://leetcode.cn/problems/add-two-numbers/
+
+  let number11 = {
+    val: '2',
+  }
+  let number12 = {
+    val: '4'
+  }
+  let number13 = {
+    val:'3'
+  }
+  number11.next = number12
+  number12.next = number13
+
+  let number21 = {
+    val: '5'
+  }
+  let number22 = {
+    val: '6'
+  }
+  let number23 = {
+    val: '9'
+  }
+  let number24 = {
+    val: '1'
+  }
+  number21.next = number22
+  number22.next = number23
+  number23.next = number24
+
+  class Node{
+    constructor(val, next) {
+      this.val = val
+      this.next = next
+    }
+  }
+
+
+  /*
+  1. 遍历两个链表，将遍历后的number 相加
+  2. 构造新链表，确定好链表节点的指向
+  3. 使用变量 prefixNumber 保存十位数，在下一次计算中，将上一次的十位数与当前的相加结果做加法，注意在合适的时机重置 prefixNumber = 0
+  */
+  function getTwoNumberAdd(number11, number21){
+    let p1 = number11
+    let p2 = number21
+    let index = 0
+    let headNode = new Node(null)
+    let currentNodePoint = headNode
+    let resultNode = headNode
+    let prefixNumber = 0
+
+    while(p1 || p2 ){
+      console.log('---');
+      let addNumber = 0
+      if(p1){
+        addNumber += Number(p1.val)
+        p1 = p1.next
+      }
+      if(p2){
+        addNumber += Number(p2.val)
+        p2 = p2.next
+      }
+      if(index === 0){
+        const numberInArray = getNumber(addNumber)
+        if(numberInArray.length === 1){
+          currentNodePoint.val = addNumber
+        } else {
+          currentNodePoint.val = numberInArray[1]
+          prefixNumber = numberInArray[0]
+        }
+      } else {
+        const numberInArray = getNumber(addNumber)
+        let newNumberNode
+        if(numberInArray.length === 1){
+          newNumberNode = new Node(numberInArray[0] + prefixNumber)
+          prefixNumber = 0
+        } else {
+          newNumberNode = new Node(numberInArray[1] + prefixNumber)
+          prefixNumber = numberInArray[0]
+        }
+        currentNodePoint.next = newNumberNode
+        currentNodePoint = newNumberNode
+      }
+      index ++
+    }
+    return resultNode
+  }
+
+  console.log(getTwoNumberAdd(number11, number21));
+
+  function getNumber(number){
+    if(number < 10){
+      return [number]
+    } else {
+      return [Math.floor(number / 10), number % 10]
+    }
+  }
+
+
+
+
+  // log(assetHelper(d), ['d', 'c', 'b', 'a'])
+
+</script>
+</body>
+</html>
