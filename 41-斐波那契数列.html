@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+
+  // todo 优化？
+  function fab(number){
+    if(number === 1|| number === 2){return 1}
+    return fab(number - 1) + fab(number - 2)
+  }
+
+  console.log(fab(1));
+  console.log(fab(2));
+  console.log(fab(3));
+  console.log(fab(4));
+  console.log(fab(5));
+
+  console.log(fab(6));
+  console.log(fab(7));
+  console.log(fab(8));
+
+
+</script>
+</body>
+</html>

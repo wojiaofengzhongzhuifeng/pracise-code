@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // todo
+  function concat(array1, array2){
+    let p1 = 0
+    let p2 = 0
+    // let number1
+    // let number2
+    let resultArray = []
+    while(p1 < array1.length || p2 < array2.length){
+      let numb1 = array1[p1]
+      let numb2 = array2[p2]
+      if(numb1 >= numb2){
+        resultArray.push(numb1, numb2)
+      } else if(numb1 < numb2){
+        resultArray.push(numb2, numb1)
+      }
+      p1++
+      p2++
+    }
+    return resultArray
+
+  }
+
+  console.log(concat([1, 2, 3, 0, 0, 0], [2, 5, 6]));
+  console.log(concat([1], []));
+  console.log(concat([0], [1]));
+
+</script>
+</body>
+</html>
