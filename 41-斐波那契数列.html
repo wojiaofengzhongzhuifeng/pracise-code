@@ -11,10 +11,18 @@
 <script>
 
 
-  // todo 优化？
+  const map = {
+    1: 1,
+    2: 1
+  }
   function fab(number){
     if(number === 1|| number === 2){return 1}
-    return fab(number - 1) + fab(number - 2)
+    let firstItemNumber = map[number - 1] ? map[number - 1] :fab(number - 1)
+    map[number - 1] = firstItemNumber
+
+    let secondItemNumber = map[number - 2] ? map[number - 2] :fab(number - 2)
+    map[number - 2] = secondItemNumber
+    return firstItemNumber + secondItemNumber
   }
 
   console.log(fab(1));
@@ -26,6 +34,7 @@
   console.log(fab(6));
   console.log(fab(7));
   console.log(fab(8));
+  console.log(map);
 
 
 </script>
