@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+  let a = {
+    val: 'a',
+
+  }
+  let b = {
+    val: 'b',
+  }
+  let c = {
+    val: 'c',
+  }
+  let d = {
+    val: 'd'
+  }
+  let e = {
+    val: 'e'
+  }
+  let f = {
+    val: 'f'
+  }
+  a.next = b
+  b.next = c
+  c.next = d
+  d.next = e
+  e.next = f
+
+
+  // 输入 a, 2 => d
+  // 输入 a, 6 => a
+  // 双指针，先让fast 走，达到一定条件后，开始走slow
+  function findBackNode(head, index){
+    let slow = null
+    let fast = head
+    let count = 0
+
+    while(fast){
+      if(count>=index){
+        slow = !slow ? head : slow.next
+      }
+      slow && console.log(slow.val)
+      fast = fast.next
+      count++
+    }
+    return slow
+  }
+
+  console.log(findBackNode(a, 2));
+  console.log(findBackNode(a, 0));
+  console.log(findBackNode(a, 1));
+  console.log(findBackNode(a, 5));
+
+
+
+
+
+</script>
+</body>
+</html>
