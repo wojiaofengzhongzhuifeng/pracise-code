@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // https://leetcode.cn/problems/intersection-of-multiple-arrays/
+  // 注意与 https://leetcode.cn/problems/intersection-of-two-arrays/description/ 对比
+
+
+  function getCombineArray(arrayArray){
+    // 1. 使用obj 存储array
+    let map = {}
+    arrayArray.forEach((numberArray)=>{
+      numberArray.forEach((number)=>{
+        map[number] ? map[number]++ : map[number] = 1
+      })
+    })
+
+    // 符合一定条件
+    let resultArray = []
+    Object.keys(map).forEach((number)=>{
+      let count = map[number]
+      if(arrayArray.length === count){
+        resultArray.push(Number(number))
+      }
+    })
+    console.log(resultArray.sort());
+    return resultArray.sort()
+  }
+
+  console.assert(JSON.stringify(getCombineArray([[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6]])) === JSON.stringify([3,4 ]));
+</script>
+</body>
+</html>
