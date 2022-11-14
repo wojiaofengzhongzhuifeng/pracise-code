@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+  let a = {
+    val: 'a',
+
+  }
+  let b = {
+    val: 'b',
+  }
+  let c = {
+    val: 'c',
+  }
+  let d = {
+    val: 'd'
+  }
+  a.next = b
+  b.next = c
+  c.next = d
+  d.next = b
+
+
+
+  let a1 = {
+    val: 'a1',
+
+  }
+  let b1 = {
+    val: 'b1',
+  }
+  let c1 = {
+    val: 'c1',
+  }
+  let d1 = {
+    val: 'd1'
+  }
+  a1.next = b1
+  b1.next = c1
+  c1.next = d1
+
+  function checkHaveCircle(head){
+    let slow = head
+    let fast = head
+    let index = 0
+
+    while(fast){
+
+      if(slow.val === fast.val){
+        if(index !== 0){
+          return true
+        }
+
+      }
+
+      slow = slow.next
+      fast = fast.next.next
+      index++
+
+    }
+    return false
+  }
+
+  console.log(checkHaveCircle(a));
+
+  console.log(checkHaveCircle(a1));
+
+</script>
+</body>
+</html>

@@ -47,7 +47,8 @@
   b.next = c
   c.next = d
 
-  // 【todo】不理解为什么 myRevert 不行
+  // myRevert 无法实现的原因是：a->b->c->null 的反转结果应该是 null <- a <- b <- c
+  // 慢指针必须从null 开始
   function myRevert(node){
     let slow = node
     let fast = node.next
