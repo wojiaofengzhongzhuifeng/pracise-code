@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+  /*
+  输入 1 ，输出 [1]
+  输入 2 ，输出 [12, 21]
+  输入 3 ，输出 [312,132,123, 321, 231, 213]
+  使用递归 + 归纳解决问题，思路与斐波那契数列一样
+  */
+
+  function getAllCombine(n){
+    if(n === 1){return [1]}
+    if(n === 2){return [12, 21]}
+
+    let tmpArray = getAllCombine(n - 1)
+
+    let tempResult = []
+    let result = []
+
+    tmpArray.forEach((number)=>{
+      tempResult.push(...xxx(number, n))
+    })
+
+    tempResult.forEach((numberArray)=>{
+      let number = Number(numberArray.join(""))
+      result.push(number)
+    })
+    return result
+
+  }
+
+  function xxx(number1, number2){
+    let number1Array = (""+number1).split("")
+    let resultArray = []
+
+    for(let i=0;i<=number1Array.length;i++){
+      let copyNumber1Array = JSON.parse(JSON.stringify(number1Array))
+      copyNumber1Array.splice(i, 0, ""+number2)
+      resultArray.push(copyNumber1Array)
+    }
+    return resultArray
+  }
+
+  console.log(getAllCombine(3));
+
+</script>
+</body>
+</html>
