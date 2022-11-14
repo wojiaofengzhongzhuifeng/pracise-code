@@ -9,30 +9,40 @@
 </head>
 <body>
 <script>
-  // todo
   function concat(array1, array2){
     let p1 = 0
     let p2 = 0
+    let index = 0
     // let number1
     // let number2
     let resultArray = []
-    while(p1 < array1.length || p2 < array2.length){
+
+    while(index < (array1.length + array2.length)){
       let numb1 = array1[p1]
       let numb2 = array2[p2]
-      if(numb1 >= numb2){
-        resultArray.push(numb2, numb1)
-      } else if(numb1 < numb2){
-        resultArray.push(numb1, numb2)
+
+      if(numb1 <= numb2){
+        resultArray[index] = numb1
+        p1++
+      } else if(numb1 > numb2){
+        resultArray[index] = numb2
+        p2++
+      } else if(numb1 === undefined){
+        resultArray[index] = numb2
+        p2++
+      } else if(numb2 === undefined){
+        resultArray[index] = numb1
+        p1++
       }
-      p1++
-      p2++
+      index++
     }
     return resultArray
 
+
   }
 
-  console.log(concat([1, 2, 3, 0, 0, 0], [2, 5, 6]));
-  console.log(concat([1], []));
+  // console.log(concat([1, 2, 3], [2, 5, 6, 10]));
+  // console.log(concat([1], []));
   console.log(concat([0], [1]));
 
 </script>
