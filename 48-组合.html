@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // https://leetcode.cn/problems/combinations/
+
+
+
+  // 暴力解决 其中输入参数 k 表示需要有多少层 for 循环
+  function findAll(n, K){
+    let numberArray = []
+    for(let i=1;i<=n;i++){
+      numberArray.push(i)
+    }
+    let resultArray = []
+    console.log(numberArray);
+
+    for(let i=0;i<=numberArray.length - 1;i++){
+      let firstNumber = numberArray[i]
+      for(let j=i+1;j<=numberArray.length - 1;j++){
+        let secondNumber = numberArray[j]
+        console.log(firstNumber, secondNumber);
+        let tempArray = [firstNumber, secondNumber]
+        resultArray.push(tempArray)
+      }
+
+    }
+
+    return resultArray
+  }
+
+  console.log(findAll(4, 2));
+</script>
+</body>
+</html>
