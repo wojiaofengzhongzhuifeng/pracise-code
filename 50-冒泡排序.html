@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+  /*
+  核心：
+  1. 确定单次排序代码 -> 内层 for 循环,小数放左边，大数放右边, 通过这个循环可以完成数组最大数放在最右侧的效果
+  2. 确定排序的次数 -> 外层for循环
+  3. 优化单次排序代码的范围 -> array.length - 2 - j
+  */
+  function sort1(array){
+    for(let j = 0;j<=array.length - 1;j++){
+      for (let i=0;i<=array.length - 2 - j;i++){
+        let leftNumber = array[i]
+        let rightNumber = array[i + 1]
+        if(leftNumber > rightNumber){
+          array[i] = rightNumber
+          array[i + 1] = leftNumber
+        }
+      }
+    }
+    console.log(array);
+  }
+
+  sort1([4, 2, 1, 3])
+  sort1([4,3,2,1])
+  sort1([1,2,3,4,5])
+</script>
+</body>
+</html>
