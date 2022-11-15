@@ -11,7 +11,7 @@
 <script>
 
   /*
-  核心：
+  核心：选择数组中最小的，放入到数组开头
   数组第一位放最小值
   数组第二位放第二小值
   ...
@@ -24,11 +24,12 @@
     for(let j=0;j<=array.length - 1;j++){
       // 单次排序，将数组中最小的数字放到数组第一位
       for(let i=j+1;i<=array.length - 1;i++){
-        let min = array[j]
-        let current = array[i]
-        if(min > current){
-          let temp = min
-          array[j] = current
+        let smallNum = array[j]
+        let bigNum = array[i]
+        if(smallNum > bigNum){
+          // 交换 bigNum 与 smallNum
+          let temp = smallNum
+          array[j] = bigNum
           array[i] = temp
         }
       }
