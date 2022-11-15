@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  /*
+  核心：输入 [23, 26] [24] 两个数组，生成一个新数组[23, 24,26]
+  */
+  function sort1(array){
+    function rec(arr){
+      if(arr.length === 1){return arr}
+      const middle = Math.floor(arr.length / 2)
+      const left = arr.slice(0, middle)
+      const right = arr.slice(middle, arr.length)
+      const orderLeft = rec(left)
+      const orderRight = rec(right)
+      const res = []
+      while(orderLeft.length||orderRight.length){
+        if(orderLeft.length && orderRight.length){
+          res.push(orderLeft[0]<orderRight[0]?orderLeft.shift():orderRight.shift())
+        } else if(orderLeft.length){
+          res.push(orderLeft.shift())
+        } else if(orderRight.length){
+          res.push(orderRight.shift())
+        }
+      }
+      return res
+    }
+    return rec(array)
+  }
+
+  console.log(sort1([23, 26, 24, 1]));
+</script>
+</body>
+</html>
