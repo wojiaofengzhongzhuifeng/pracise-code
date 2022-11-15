@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+  /*
+  核心：
+  数组第一位放最小值
+  数组第二位放第二小值
+  ...
+
+  */
+
+
+  function sort1(array){
+    // 执行多次排序操作
+    for(let j=0;j<=array.length - 1;j++){
+      // 单次排序，将数组中最小的数字放到数组第一位
+      for(let i=j+1;i<=array.length - 1;i++){
+        let min = array[j]
+        let current = array[i]
+        if(min > current){
+          let temp = min
+          array[j] = current
+          array[i] = temp
+        }
+      }
+    }
+
+    console.log(array);
+  }
+
+  sort1([4, 2, 1, 3])
+  // sort1([4,3,2,1])
+  // sort1([1,2,3,4,5])
+</script>
+</body>
+</html>
