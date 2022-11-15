@@ -18,6 +18,7 @@
       const middle = Math.floor(arr.length / 2)
       const left = arr.slice(0, middle)
       const right = arr.slice(middle, arr.length)
+      // orderLeft orderRight 都是有序数组，下面的逻辑是使用两个有序数组，返回一个新的有序数组
       const orderLeft = rec(left)
       const orderRight = rec(right)
       const res = []
