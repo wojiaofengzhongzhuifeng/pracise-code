@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  /*
+  https://leetcode.cn/problems/same-tree/
+  左右值也要相同
+  */
+  const tree = {
+    val: '1',
+    left: {
+      val: '2',
+      left: {
+        val: '4'
+      },
+      right: {
+        val: '5',
+      }
+    },
+    right: {
+      val: '3',
+      left: {
+        val: '6'
+      },
+      right: {
+        val: '7',
+      }
+    }
+  }
+  const tree1 = {
+    val: '1',
+    left: {
+      val: '2',
+      left: {
+        val: '4'
+      },
+      right: {
+        val: '5',
+      }
+    },
+    right: {
+      val: '3',
+      left: {
+        val: '6'
+      },
+      right: {
+        val: '7',
+      }
+    }
+  }
+
+  function isSameTree(tree1, tree2){
+    if(!tree1 && !tree2){return true}
+
+    if(
+      tree1 &&
+      tree2 &&
+      isSameTree(tree1.left, tree2.left) &&
+      isSameTree(tree1.right, tree2.right) &&
+      tree1.val === tree2.val
+    ){
+      return true
+    } else {
+      return false
+    }
+    // isSameTree(tree1.left, tree2.left)
+    // isSameTree(tree1.right, tree2.right)
+    // return tree1.val === tree2.val;
+  }
+
+  console.log(isSameTree(tree, tree1.left));
+
+
+</script>
+</body>
+</html>
