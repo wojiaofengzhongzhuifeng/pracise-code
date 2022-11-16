@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  const tree = {
+    val: '1',
+    left: {
+      val: '2',
+      left: {
+        val: '4'
+      },
+      right: {
+        val: '5',
+      }
+    },
+    right: {
+      val: '3',
+      left: {
+        val: '6'
+      },
+      right: {
+        val: '7',
+      }
+    }
+  }
+
+  /*
+  核心：
+  1. 完成单次翻转需求
+  2. 调用递归函数
+  3. 思考退出条件
+
+  新知识：return 对结果的影响
+
+  */
+  function revert(tree){
+    if(!tree){return null}
+    return {
+      val: tree.val,
+      left: revert(tree.right),
+      right: revert(tree.left),
+    }
+
+
+
+    /*
+    if(tree.right && tree.left){
+      return {
+        val: tree.val,
+        left: revert(tree.right),
+        right: revert(tree.left),
+      }
+    } else if (tree.left){
+      return {
+        val: tree.val,
+        left: tree.right && revert(tree.right),
+      }
+    } else if (tree.right){
+      return {
+        val: tree.val,
+        right: revert(tree.left),
+      }
+    } else {
+      return {
+        val: tree.val
+      }
+    }k
+     */
+
+  }
+
+  console.log(revert(tree));
+
+
+</script>
+</body>
+</html>
