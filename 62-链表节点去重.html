@@ -30,7 +30,7 @@
     }
     removeNodeByNodeObj = (node)=>{
       const preNode = this.findPreNodeByNodeObj(node)
-      console.log('preNode', preNode.val);
+      console.log('preNode', preNode, node);
       if(preNode){
         preNode.next = node.next
       }
@@ -70,12 +70,9 @@
     Object.keys(map).forEach((key)=>{
       let nodeList = map[key]
       if(nodeList.length !== 1){
-        // 存在重复
-        let repeatNodeList = nodeList.slice(1)
-        console.log('repeatNodeList', nodeList, repeatNodeList);
-        repeatNodeList.forEach((node)=>{
-          headNode.removeNodeByNodeObj(node)
-        })
+        // 存在重复, 只保留第一个
+        let node = nodeList[0]
+        headNode.removeNodeByNodeObj(node)
       }
     })
     console.log(map);
