@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+
+  // 最简单的回溯需求
+  const test1 = (numberArray)=>{
+    let reuslt = []
+    let ttt = (pathArray)=>{
+      if(pathArray.length === numberArray.length){
+        reuslt.push(pathArray)
+        return
+      }
+      numberArray.forEach((num)=>{
+        ttt(pathArray.concat(num))
+      })
+    }
+    ttt([])
+    return reuslt
+  }
+  console.log(123321, test1([1, 2, 3]));
+
+  // 包含一定条件的回溯需求
+  const test2 = (numberArray)=>{
+    let reuslt = []
+    let ttt = (pathArray)=>{
+      if(pathArray.length === numberArray.length){
+        reuslt.push(pathArray)
+        return
+      }
+      numberArray.forEach((num)=>{
+        if(pathArray.includes(num)){
+          return
+        }
+        ttt(pathArray.concat(num))
+      })
+    }
+    ttt([])
+    return reuslt
+  }
+  console.log(123321, test2([1, 2, 3]));
+
+  // 包含一定条件的回溯需求：不包含重复的元素
+  const test3 = (numberArray)=>{
+    const res = []
+    const ttt = (pathArray, l, start )=>{
+      if(pathArray.length === l){
+        res.push(pathArray)
+        return
+      }
+      for(let i=start; i<=numberArray.length-1;i++){
+        // i+1 不可以是 i++
+        ttt(pathArray.concat(numberArray[i]), l, i+1)
+      }
+    }
+    for(let i=0;i<=numberArray.length;i++){
+      ttt([], i, 0)
+    }
+    return res
+  }
+  console.log('test3', test3([1, 2, 3]));
+
+</script>
+</body>
+</html>
