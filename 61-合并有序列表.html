@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // https://leetcode.cn/problems/merge-two-sorted-lists/description/
+  class LinedList{
+    constructor(val, next) {
+      this.val = val
+      this.next = next
+    }
+  }
+
+  let node1 = new LinedList(1)
+  let node2 = new LinedList(2)
+  let node4 = new LinedList(4)
+
+  let node11 = new LinedList(1)
+  let node3 = new LinedList(3)
+  let node44 = new LinedList(4)
+
+  node1.next = node2
+  node2.next = node4
+
+  node11.next = node3
+  node3.next = node44
+
+  function combineTwoLinked(firstHead, secondHead){
+    // 分别对两个链表遍历，
+    let first =  firstHead
+    let second = secondHead
+    let resultHeader = new LinedList(0)
+    let current = resultHeader
+    let index = 0
+
+    while(first || second){
+
+      console.log(first, second);
+
+      if(!first){
+        let newNode = new LinedList(second.val)
+        current.next = newNode
+        current = newNode
+        second = second.next
+      } else if (!second){
+        let newNode = new LinedList(first.val)
+        current.next = newNode
+        current = newNode
+        first = first.next
+      } else if (first.val >= second.val){
+
+        let newNode = new LinedList(second.val)
+        current.next = newNode
+        current = newNode
+
+        second = second.next
+      } else if (first.val < second.val){
+
+        let newNode = new LinedList(first.val)
+        current.next = newNode
+        current = newNode
+        first = first.next
+      }
+
+      // if(first.val >= second.val){
+      //   resultHeader.next = new LinedList(second.val)
+      //   second = second.next
+      // } else if (first.val < second.val){
+      //   resultHeader.next = new LinedList(first.val)
+      //   first = first.next
+      // } else if (!first){
+      //   resultHeader.next = new LinedList(second.val)
+      //   second = second.next
+      // } else if (!second){
+      //   resultHeader.next = new LinedList(first.val)
+      //   first = first.next
+      // }
+      index++
+    }
+    return resultHeader.next
+  }
+
+  console.log(combineTwoLinked(node1, node11));
+
+</script>
+</body>
+</html>
