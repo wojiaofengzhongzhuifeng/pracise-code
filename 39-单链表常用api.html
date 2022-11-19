@@ -92,8 +92,37 @@
       newNode.next = node
     }
 
+    exChangePositionWithFrontNode = (node)=>{
+      // 实现一个单链表并实现给定其中一个节点，将此节点往前移动一步的方法，即相当于和它前面节点位置互换
+
+      // 1 使用双指针，得到前一个节点
+      let preNode = null
+      let fast = this
+      while(fast){
+        if(fast.val === node.val){
+
+          break
+        }
+        console.log('fast.val', fast.val)
+        preNode = fast
+        fast = fast.next
+
+      }
+      console.log('slow', preNode);
+
+      // 交换位置
+      if(preNode){
+        let preValue = preNode.val
+        preNode.val = node.val
+        node.val = preValue
+      }
+
+      return preNode
+    }
+
   }
 
+  // node1是头节点
   let node1 = new LinedList('a')
   node1.append(new LinedList('b'))
   let nodec = new LinedList('c')
@@ -115,6 +144,11 @@
   // 在 c 前插入 c0 node 节点
   node1.insertBefore(nodec, new LinedList('c0'))
   console.log('node1 insertBefore', node1);  // a -> c0 -> c -> c1 -> d -> e
+
+  // 交换 c0 与 c 位置
+  node1.exChangePositionWithFrontNode(nodec)
+  console.log('node1 exChangePositionWithFrontNode', node1);  // a -> c -> c0 -> c1 -> d -> e
+
 </script>
 </body>
 </html>
