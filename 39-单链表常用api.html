@@ -38,6 +38,22 @@
       }
     }
 
+
+    findPreNodeByNodeObj = (node)=>{
+      // 1 使用双指针，得到前一个节点
+      let preNode = null
+      let currentNode = this
+      while(currentNode){
+        // console.log('test', currentNode.val, node.val, preNode);
+        // console.log('---');
+        if(currentNode.val === node.val){
+          return preNode
+        }
+        preNode = currentNode
+        currentNode = currentNode.next
+      }
+    }
+
     // 遍历链表的值到一个数组
     getElement = (index)=>{
       let resultArray = []
@@ -53,6 +69,13 @@
       } else {
         console.error("找不到数据")
         return undefined
+      }
+    }
+
+    removeNodeByNodeObj = (node)=>{
+      const preNode = this.findPreNodeByNodeObj(node)
+      if(preNode){
+        preNode.next = node.next
       }
     }
 
@@ -84,9 +107,6 @@
         // slow = slow.next
         fast = fast.next
       }
-
-      console.log('preNode', preNode);
-
       // 2. 常规操作
       preNode && (preNode.next = newNode)
       newNode.next = node
@@ -95,20 +115,7 @@
     exChangePositionWithFrontNode = (node)=>{
       // 实现一个单链表并实现给定其中一个节点，将此节点往前移动一步的方法，即相当于和它前面节点位置互换
 
-      // 1 使用双指针，得到前一个节点
-      let preNode = null
-      let fast = this
-      while(fast){
-        if(fast.val === node.val){
-
-          break
-        }
-        console.log('fast.val', fast.val)
-        preNode = fast
-        fast = fast.next
-
-      }
-      console.log('slow', preNode);
+      const preNode = this.findPreNodeByNodeObj(node)
 
       // 交换位置
       if(preNode){
@@ -120,6 +127,16 @@
       return preNode
     }
 
+    getSnapShot = ()=>{
+      let res = []
+      let point = this
+      while(point){
+        res.push(point.val)
+        point = point.next
+      }
+      return res
+    }
+
   }
 
   // node1是头节点
@@ -127,27 +144,41 @@
   node1.append(new LinedList('b'))
   let nodec = new LinedList('c')
   node1.append(nodec)
-  node1.append(new LinedList('d'))
-  node1.append(new LinedList('e'))
-  console.log('node1', node1); // a -> b -> c -> d -> e
+  let noded = new LinedList('d')
+  node1.append(noded)
+  let nodee = new LinedList('e')
+  node1.append(nodee)
+  console.log('initial node1', node1.getSnapShot()); // a -> b -> c -> d -> e
 
   let result = node1.getElement(1)
-  console.log('result', result);
+  console.log('getElement second node', result);
 
   node1.remove(1, 2)
-  console.log('node1 remove', node1);  // a -> c -> d -> e
+  console.log('remove second node', node1.getSnapShot())   // a -> c -> d -> e
 
   // 在 c 后插入 c1 node 节点
   node1.insertAfter(nodec, new LinedList('c1'))
-  console.log('node1 insertAfter', node1);  // a -> c -> c1 -> d -> e
+  console.log('insert c1 after node c', node1.getSnapShot());  // a -> c -> c1 -> d -> e
 
   // 在 c 前插入 c0 node 节点
-  node1.insertBefore(nodec, new LinedList('c0'))
-  console.log('node1 insertBefore', node1);  // a -> c0 -> c -> c1 -> d -> e
+  let c0 =  new LinedList('c0')
+  node1.insertBefore(nodec, c0)
+  console.log('insert c0 before node c', node1.getSnapShot());  // a -> c0 -> c -> c1 -> d -> e
 
-  // 交换 c0 与 c 位置
-  node1.exChangePositionWithFrontNode(nodec)
-  console.log('node1 exChangePositionWithFrontNode', node1);  // a -> c -> c0 -> c1 -> d -> e
+  let result1 = node1.findPreNodeByNodeObj(nodee)
+  console.log('find node e pre node 注意: result1 被 exChangePositionWithFrontNode 影响，导致 val = c1 ', result1.val, result1); //
+
+
+  // 输入 nodec node obj ,从单链表删除 nodec
+  node1.removeNodeByNodeObj(nodec)
+  console.log('remove c', node1.getSnapShot()); // ['a', 'c0', 'c1', 'd', 'e']
+
+
+  node1.exChangePositionWithFrontNode(noded)
+  console.log('exchange node d and node c1', node1.getSnapShot()); //  ['a', 'c0', 'c1', 'e', 'd']
+
+
+
 
 </script>
 </body>
