@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  class LinedList{
+    constructor(val, next) {
+      this.val = val
+      this.next = next
+    }
+
+  }
+  let node1 = new LinedList(1)
+  let node2 = new LinedList(2)
+  let node4 = new LinedList(2)
+  let node44 = new LinedList(44)
+  node1.next = node2
+  node2.next = node4
+  node4.next = node44
+
+  // 思路1：将链表转化为数组，然后通过数组判断是否为回文
+  // 思路2: 讲链表进行反转，对两条链表每个值进行判断是否相同
+</script>
+</body>
+</html>
