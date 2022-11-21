@@ -12,21 +12,6 @@
 
 <script>
 
-  function log(fnObj, assetObj){
-    console.log(fnObj)
-    console.assert(JSON.stringify(fnObj) === JSON.stringify(assetObj))
-  }
-
-  // 以下代码用于断言
-  function assetHelper(headNode){
-    let resultArray = []
-    let p = headNode
-    while(p){
-      resultArray.push(p.val)
-      p = p.next
-    }
-    return resultArray
-  }
 
 
   // https://leetcode.cn/problems/reverse-linked-list/
@@ -47,38 +32,33 @@
   b.next = c
   c.next = d
 
-  // myRevert 无法实现的原因是：a->b->c->null 的反转结果应该是 null <- a <- b <- c
-  // 慢指针必须从null 开始
-  function myRevert(node){
-    let slow = node
-    let fast = node.next
-    while (fast){
-      let temp = fast.next
-      fast.next = slow
-      console.log('slowP.val', slow.val)
-      console.log('fastP.val', fast.val)
-      slow = fast
-      fast = temp
-    }
-  }
-  function revert(head){
-    let fast = head
+  /*
+  核心：
+
+  myRevert 无法实现的原因是：a->b->c->null 的反转结果应该是 null <- a <- b <- c
+  慢指针必须从null 开始
+  */
+  function test(headNode){
     let slow = null
+    let fast = headNode
+
+
     while(fast){
-      const temp = fast.next
+      let temp = fast.next
+      // 反转核心代码
       fast.next = slow
+
+      // 双指针
       slow = fast
       fast = temp
+
     }
 
   }
-  debugger
-  myRevert(a)
-  console.log(d)
 
+  test(a)
+  console.log(d);
 
-
-  log(assetHelper(d), ['d', 'c', 'b', 'a'])
 
 </script>
 </body>
