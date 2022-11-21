@@ -8,7 +8,13 @@
   <title>Document</title>
 </head>
 <body>
+<img src=".readme_images/468ca982.png" alt="">
+
 <script>
+  /*
+  为什么不能使用广度遍历？
+  不知道什么时候遍历完整层
+   */
   const tree = {
     val: 'a',
     left: {
@@ -43,7 +49,7 @@
   function test(tree){
     let resultNumber = 0
     function dfs(tree, index){
-      // tree.val && console.log(tree.val, index)
+      tree.val && console.log(tree.val, index)
       resultNumber = Math.max(resultNumber, index)
       tree.left && dfs(tree.left, index + 1)
       tree.right && dfs(tree.right, index + 1)
@@ -54,6 +60,18 @@
   console.log(  test(tree))
   console.assert(test(tree) === 5)
 
+  function test1(tree){
+    function bfs(tree,index){
+      const stack = [[tree, index]]
+      while(stack.length){
+        let n = stack.shift()
+        console.log('n.val', n.val, );
+        n.left && stack.push([n.left, index + 1])
+        n.right && stack.push([n.right, index + 1])
+      }
+    }
+    bfs(tree, 1)
+  }
 
 </script>
 </body>
