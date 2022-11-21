@@ -20,6 +20,13 @@
     ]
   }
 
+  /*
+  核心流程：
+  1. 将树节点放入栈
+  2. 获取栈的最后一个树节点，出栈
+  3. 打印树节点的值
+  4. 将树节点的子节点取反后入栈
+  */
   function test(tree){
     let stack = [tree]
     while(stack.length > 0){
