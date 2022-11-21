@@ -9,11 +9,12 @@
 </head>
 <body>
 <img src=".readme_images/468ca982.png" alt="">
+
 <script>
   /**
    * 核心流程：
-   1. 使用链表遍历的方式，将二叉树单边所有左子节点放到栈
-   2. 取出栈最后一个节点，执行log 操作；并且将指针指向最后一个节点的right节点，尝试获取 right节点的所有左子节点，放到栈中准备执行
+   1. 使用链表遍历的方式，将二叉树单边所有右子节点放到栈
+   2. 取出栈最后一个节点，执行log 操作；并且将指针指向最后一个节点的 left 节点，尝试获取 left 节点的所有right子节点，放到栈中准备执行
    */
 
   const tree = {
@@ -47,25 +48,27 @@
     }
   }
 
-  function 中序1(treeNode){
+  function 后序(treeNode){
     let p = treeNode
     let stack = []
     let result = []
 
-    while(p || stack.length ){
-      while(p){
-        stack.push(p)
-        p = p.left // 经常为null
-      }
-      const n = stack.pop()
-      console.log(n.val)
-      result.push(n.val)
-      p = n.right
+    while(p){
+      stack.push(p)
+      p = p.left // 经常为null
     }
-    return result
+
+
+    const n = stack.pop()
+    console.log(n.val);
+
+    p = n.right
 
   }
-  console.assert(JSON.stringify(test1(tree)) === JSON.stringify(['d', 'b', 'g', 'e', 'h', 'j', 'a', 'c', 'i', 'f']))
+  console.assert(JSON.stringify(后序(tree)) === JSON.stringify(['d', 'g', 'j', 'h', 'e', 'b', 'i', 'f', 'c', 'a']))
+
+
+
 
 </script>
 </body>
