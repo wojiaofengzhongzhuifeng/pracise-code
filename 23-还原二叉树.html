@@ -4,58 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
 </head>
 <body>
+<img src=".readme_images/468ca982.png" alt="">
+
 <script>
   const 中序结果 = ['D', 'B', 'G', 'E', 'H', 'J', 'A', 'C', 'I', 'F']
   const 后序结果 = ['D', 'G','J','H','E','B','I','F','C','A']
 
-  function getObjByArray(array, char){
-    // if(array.filter((arrayChar)=>arrayChar === char).length === 0){return array}
-    let index = array.indexOf(char)
-    if(index === -1){return array}
-    let leftArray = array.slice(0, index)
-    let rightArray = array.slice(index + 1)
-    return {
-      val: char,
-      left: leftArray,
-      right: rightArray,
+
+  function xxxx(中序结果, 后序结果){
+    function getObjByArray(array, char){
+      if(array.length === 1 ){return {
+        val: array[0]
+      }}
+      if(后序结果.indexOf(char)===0){return null}
+      let nextChar = 后序结果[后序结果.indexOf(char) - 1]
+
+
+      let index = array.indexOf(char)
+      if(index === -1){return getObjByArray(array, nextChar)}
+      // let leftArray = array.slice(0, index)
+      // let rightArray = array.slice(index + 1)
+
+
+      return {
+        val: char,
+        left: getObjByArray(array.slice(0, index), nextChar),
+        right: getObjByArray(array.slice(index + 1), nextChar),
+      }
+
+
     }
 
+    return getObjByArray(中序结果, 后序结果[后序结果.length - 1])
 
   }
 
-  // console.log(getObjByArray(['C', 'I', 'F'], 'C'));
-  // console.log(getObjByArray(['D', 'B', 'G', 'E', 'H', 'J'], 'C'));
-  console.log(getObjByArray(['D', 'B', 'G', 'E', 'H', 'J', 'A', 'C', 'I', 'F'], 'A'))
 
-  console.log(getObjByArray(['D', 'B', 'G', 'E', 'H', 'J',], 'C'))
-  console.log(getObjByArray(['D', 'B', 'G', 'E', 'H', 'J',], 'F'))
-  console.log(getObjByArray(['D', 'B', 'G', 'E', 'H', 'J',], 'I'))
-  console.log(getObjByArray(['D', 'B', 'G', 'E', 'H', 'J',], 'B'))
-
-
-
-
-  console.log(getObjByArray(['C', 'I', 'F'], 'C'))
-
-  // function test(){
-  //
-  //   后序结果.forEach((char, index)=>{
-  //     let result = getObjByArray(中序结果, char)
-  //     if(!(result instanceof  Array)){
-  //       result.left = getObjByArray(result.left, 后序结果[index])
-  //       result.right = getObjByArray(result.right, 后序结果[index])
-  //     } else {
-  //
-  //     }
-  //     return result
-  //   })
-  // }
-
-  // console.log(test());
+  console.log(xxxx(中序结果, 后序结果));
 
 
 </script>
