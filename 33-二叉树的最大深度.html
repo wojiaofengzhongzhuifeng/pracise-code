@@ -11,10 +11,6 @@
 <img src=".readme_images/468ca982.png" alt="">
 
 <script>
-  /*
-  为什么不能使用广度遍历？
-  不知道什么时候遍历完整层
-   */
   const tree = {
     val: 'a',
     left: {
@@ -46,10 +42,11 @@
     }
   }
 
+  // 使用深度遍历，获取最大深度
   function test(tree){
     let resultNumber = 0
     function dfs(tree, index){
-      tree.val && console.log(tree.val, index)
+      // tree.val && console.log(tree.val, index)
       resultNumber = Math.max(resultNumber, index)
       tree.left && dfs(tree.left, index + 1)
       tree.right && dfs(tree.right, index + 1)
@@ -60,18 +57,38 @@
   console.log(  test(tree))
   console.assert(test(tree) === 5)
 
+  // 终极解决方案：处理最大与最小深度
   function test1(tree){
     function bfs(tree,index){
       const stack = [[tree, index]]
+      const helperstack = [[tree, index]]
       while(stack.length){
-        let n = stack.shift()
-        console.log('n.val', n.val, );
-        n.left && stack.push([n.left, index + 1])
-        n.right && stack.push([n.right, index + 1])
+        let [n, index1] = stack.shift()
+        n.left && stack.push([n.left, index1 + 1]) && helperstack.push([n.left, index1 + 1])
+        n.right && stack.push([n.right, index1 + 1]) && helperstack.push([n.right, index1 + 1])
       }
+
+      // 以下不是重点
+      console.log(helperstack);
+      let minLevel = helperstack.filter((children)=>{
+        const item = children[0]
+        if(!item.left && !item.right){
+          return true
+        }
+      })[0][1]
+
+      let maxLevel = helperstack.map((children)=>{
+        const level = children[1]
+        return level
+      }).sort((a, b)=>b-a)[0]
+      console.log('minLevel', minLevel);
+      console.log('maxLevel', maxLevel);
+
     }
     bfs(tree, 1)
   }
+
+  console.log(test1(tree));
 
 </script>
 </body>
