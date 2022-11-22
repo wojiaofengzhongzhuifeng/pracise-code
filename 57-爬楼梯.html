@@ -8,12 +8,15 @@
   <title>Document</title>
 </head>
 <body>
+<img src=".readme_images/93d148ca.png" alt="">
 <script>
   // https://leetcode.cn/problems/climbing-stairs/
   /*
+  方法1：
+  归纳整理
+
   n 表示台阶数
   k 表示跳法
-  与斐波那契数列基本一致
 
   n = 1
   k = 1
@@ -30,8 +33,58 @@
   n = 5
   k = 8 1+1+1+1+1 / 1+1+1+2 / 1+1+2+1 / 1+2+1+1 / 2+1+1+1 / 1+2+2 / 2+1+2 / 2+2+1
 
-
   */
+  function test1(n){
+    if(n<=2){return n}
+    return test1(n-1) + test1(n-2)
+  }
+  console.log('第一种方法',test1(5));
+
+  /*
+  使用缓存，优化计算逻辑
+  */
+  const map = {
+    1: 1,
+    2: 2,
+  }
+  function test2(n){
+    if(n<=2){return n}
+    let firstNumber
+    let secondNumber
+    if(!map[n-1]){map[n-1] = test1(n-1)}
+    firstNumber = map[n-1]
+
+    if(!map[n-2]){map[n-2] = test1(n-2)}
+    secondNumber = map[n-2]
+
+    return firstNumber + secondNumber
+  }
+  console.log('使用缓存优化第一种方法',test2(5));
+
+  /*
+  另一种优化方式：使用变量保存计算结果，优化计算逻辑，感觉不是很重要，不是特别直观
+  */
+  function test3(n){
+    if(n <= 2) return n;
+    let n1 = 1
+    let n2 = 2
+    let res = 0
+    for (let i=3;i<=n;i++){
+      res = n1 + n2
+      n1 = n2
+      n2 = res
+    }
+    return res
+  }
+  console.log('使用循环累加优化第一种方法',test3(5));
+
+
+  /*
+  深刻理解 f(n) = f(n-1) + f(n-2) 的含义，看图
+  * */
+
+
+
 </script>
 </body>
 </html>
