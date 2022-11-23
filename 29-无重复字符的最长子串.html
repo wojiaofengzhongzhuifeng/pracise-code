@@ -44,6 +44,20 @@
   console.assert(lengthOfLongestSubstring('bbbbb') === 1)
   console.assert(lengthOfLongestSubstring('pwwkew') === 3)
 
+  function test(string){
+    let stringArray = string.split('')
+    let p1 = 0
+    let p2 = 1
+    let windowArray = []
+
+    while(p2 < stringArray.length - 1){
+      let char1 = stringArray[p1]
+      let char2 = stringArray[p2]
+      windowArray = stringArray.slice(p1, p2)
+      if(!windowArray.includes(char2)){}
+    }
+  }
+
 </script>
 </body>
 </html>

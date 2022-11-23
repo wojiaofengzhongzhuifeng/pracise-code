@@ -18,17 +18,18 @@
     3.1 慢指针位置 + 1
     3.2 最新的慢指针位置的值设置为当前快指针的值
 
+  慢指针就是等待被修改的指针
   */
-  function remove(array){
-    if(array.length <= 1){return array.length}
+  function remove(nums){
+    if(nums.length <= 1){return nums.length}
     let slowPoint = 0
     let fastPoint = 1
-    while(fastPoint < array.length){
-      let slowNumber = array[slowPoint]
-      let fastNumber = array[fastPoint]
+    while(fastPoint < nums.length){
+      let slowNumber = nums[slowPoint]
+      let fastNumber = nums[fastPoint]
       if(slowNumber !== fastNumber){
         slowPoint += 1
-        array[slowPoint] = fastNumber
+        nums[slowPoint] = fastNumber
       }
       fastPoint += 1
     }
