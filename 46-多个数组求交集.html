@@ -11,36 +11,13 @@
 <script>
   // https://leetcode.cn/problems/intersection-of-multiple-arrays/
   // 注意与 16-寻找两个数组的交集.html 作区分 https://leetcode.cn/problems/intersection-of-two-arrays/description/ 对比
+  // 请参考 16 题
 
 
-  function getCombineArray(arrayArray){
-    // 1. 使用obj 存储array
-    let map = {}
-    arrayArray.forEach((numberArray)=>{
-      let haveAdd = false
-      numberArray.forEach((number)=>{
-        if(map[number] && !haveAdd){
-          map[number]++
-        } else {
-          haveAdd = true
-          map[number] = 1
-        }
-      })
-    })
-
-    // 符合一定条件
-    let resultArray = []
-    Object.keys(map).forEach((number)=>{
-      let count = map[number]
-      if(arrayArray.length === count){
-        resultArray.push(Number(number))
-      }
-    })
-    console.log(resultArray.sort());
-    return resultArray.sort()
-  }
 
   console.assert(JSON.stringify(getCombineArray([[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6, 6, 6]])) === JSON.stringify([3,4 ]));
+  console.assert(JSON.stringify(getCombineArray([[3, 1, 2, 6, 4, 5], [1, 2, 6, 3, 4], [3, 4, 5, 6, 6, 6]])) === JSON.stringify([3,4 ]));
+  console.log(getCombineArray([[3, 1, 2, 6, 4, 5], [1, 2, 6, 3, 4], [3, 4, 5, 6, 6, 6]]));
 </script>
 </body>
 </html>

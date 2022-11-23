@@ -58,6 +58,7 @@
   }
 
 
+  // 双指针法
   function test(array1, array2){
     let index1 = 0
     let index2 = 0
@@ -92,6 +93,39 @@
   test([1,2,2,1], [2,2])
   test([4,9,5], [9,4,9,8,4])
 
+  /*
+  集合法：
+  test1([[1, 2, 2, 1], [2, 2]]) 这个数据产生的map 为：
+  {
+    1: [0,]
+    2: [0, 1]
+  }
+  map 的含义为：数字 1 在第一项数组出现;数字 2 在第 1， 2 项数组出现
+  */
+
+  function test1(arrayArray){
+    let map = {}
+    arrayArray.forEach((array, index)=>{
+      array.forEach((number)=>{
+        if(!map[number]){
+          map[number] = [index]
+        } else{
+          if(!map[number].includes(index)){// 核心代码
+            map[number].push(index)
+          }
+        }
+      })
+    })
+    console.log(map);
+    return Object.keys(map).filter((array)=>{
+      return map[array].length === arrayArray.length
+    })
+  }
+
+  console.log(test1([[1, 2, 2, 1], [2, 2]]));
+  console.log(test1([[4, 9, 5], [9, 4, 9, 8, 4]]));
+  console.log(test1([[3, 1, 2, 6, 4, 5], [1, 2, 6, 3, 4], [3, 4, 5, 6, 6, 6]]));
+  console.log(test1([[3, 1, 2, 4, 5], [1, 2, 3, 4], [3, 4, 5, 6, 6, 6]]));
 </script>
 </body>
 </html>
