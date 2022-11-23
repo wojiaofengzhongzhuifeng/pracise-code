@@ -49,15 +49,29 @@
     let p1 = 0
     let p2 = 1
     let windowArray = []
+    let resulArray = []
 
-    while(p2 < stringArray.length - 1){
+    while(p2 < stringArray.length){
       let char1 = stringArray[p1]
       let char2 = stringArray[p2]
       windowArray = stringArray.slice(p1, p2)
-      if(!windowArray.includes(char2)){}
+      if(resulArray.length <= windowArray.length){
+        resulArray = stringArray.slice(p1, p2)
+      }
+      if(!windowArray.includes(char2)){
+        p2++
+      } else {
+        p1 = p2
+        p2 = p1 + 1
+      }
     }
+    // console.log(windowArray);
+    console.log(resulArray);
   }
 
+  console.assert(test('abcabcbb') === 3)
+  console.assert(test('bbbbb') === 1)
+  console.assert(test('pwwkew') === 3)
 </script>
 </body>
 </html>
