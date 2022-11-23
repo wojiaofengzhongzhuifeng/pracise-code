@@ -14,74 +14,43 @@
       this.val = val
       this.next = next
     }
-    findPreNodeByNodeObj = (node)=>{
-      // 1 使用双指针，得到前一个节点
-      let preNode = null
-      let currentNode = this
-      while(currentNode){
-        // console.log('test', currentNode.val, node.val, preNode);
-        // console.log('---');
-        if(currentNode.val === node.val){
-          return preNode
-        }
-        preNode = currentNode
-        currentNode = currentNode.next
-      }
-    }
-    removeNodeByNodeObj = (node)=>{
-      const preNode = this.findPreNodeByNodeObj(node)
-      console.log('preNode', preNode, node);
-      if(preNode){
-        preNode.next = node.next
-      }
-    }
-
-    getSnapShot = ()=>{
-      let res = []
-      let point = this
-      while(point){
-        res.push(point.val)
-        point = point.next
-      }
-      return res
-    }
   }
   let node1 = new LinedList(1)
   let node2 = new LinedList(2)
+  let node3 = new LinedList(2)
   let node4 = new LinedList(2)
   let node44 = new LinedList(44)
   node1.next = node2
-  node2.next = node4
+  node2.next = node3
+  node3.next = node4
   node4.next = node44
 
-  // 链表节点去重，去除链表中值相同的节点
-  function unique(headNode){
-    let map = {}
 
-    let point = headNode
-    while(point){
-      const value = point.val
-      if(!map[value]){
-        map[value] = []
+  function test(node){
+    let slow = node
+    let fast = node.next
+    let haveDup = false
+    while(fast){
+
+      if(slow.val === fast.val){
+        haveDup = true
+        fast = fast.next
+      } else {
+        if(haveDup){
+          slow.next = fast // 核心代码
+          haveDup = false
+        }
+        slow = fast
+        fast = fast.next
+
       }
-      map[value].push(point)
-      point = point.next
+
     }
-    Object.keys(map).forEach((key)=>{
-      let nodeList = map[key]
-      if(nodeList.length !== 1){
-        // 存在重复, 只保留第一个
-        let node = nodeList[0]
-        headNode.removeNodeByNodeObj(node)
-      }
-    })
-    console.log(map);
-    return map
   }
-
-  console.log(unique(node1));
-  console.log(node1.getSnapShot());
+  test(node1)
   console.log(node1);
+
+
 </script>
 </body>
 </html>

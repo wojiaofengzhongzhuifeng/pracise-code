@@ -40,9 +40,6 @@
     let index = 0
 
     while(first || second){
-
-      console.log(first, second);
-
       if(!first){
         let newNode = new LinedList(second.val)
         current.next = newNode
@@ -87,6 +84,34 @@
   }
 
   console.log(combineTwoLinked(node1, node11));
+
+  function test(node1, node2){
+    let p1 = node1
+    let p2 = node2
+    let result = new LinedList(null)
+    let currentP = result
+    while(p1 || p2){
+      if(!p1){
+        currentP.next = new LinedList(p2.val)
+        p2 = p2.next
+      }  else if (!p2){
+        currentP.next = new LinedList(p1.val)
+        p1 = p1.next
+      }
+      else if(p1.val >= p2.val){
+        currentP.next = new LinedList(p2.val)
+        p2 = p2.next
+      } else if (p1.val < p2.val){
+        currentP.next = new LinedList(p1.val)
+        p1 = p1.next
+      }
+      currentP = currentP.next // 这个很容易遗漏
+
+    }
+    return result
+  }
+
+  console.log(test(node1, node11));
 
 </script>
 </body>
