@@ -12,23 +12,6 @@
 
 <script>
 
-  function log(fnObj, assetObj){
-    console.log(fnObj)
-    console.assert(JSON.stringify(fnObj) === JSON.stringify(assetObj))
-  }
-
-  // 以下代码用于断言
-  function assetHelper(headNode){
-    let resultArray = []
-    let p = headNode
-    while(p){
-      resultArray.push(p.val)
-      p = p.next
-    }
-    return resultArray
-  }
-
-
   // https://leetcode.cn/problems/add-two-numbers/
 
   let number11 = {
@@ -68,9 +51,15 @@
 
 
   /*
+  核心：
   1. 遍历两个链表，将遍历后的number 相加
   2. 构造新链表，确定好链表节点的指向
   3. 使用变量 prefixNumber 保存十位数，在下一次计算中，将上一次的十位数与当前的相加结果做加法，注意在合适的时机重置 prefixNumber = 0
+  */
+  /*
+  新知识：
+  1. 如何同时遍历不同长度的两个单链表？
+  2. 进位操作如何实现？
   */
   function getTwoNumberAdd(number11, number21){
     let p1 = number11
@@ -128,10 +117,48 @@
     }
   }
 
+  function test(node1, node2){
+    let p1 = node1
+    let p2 = node2
+    let resultNode = new Node(null)
+    let currentPoint = resultNode
+    let 前一位的十位 = 0
+    while(p1 || p2){
+      let firstNumber = 0
+      let secondNumber = 0
+      if(p1 && p1.val){
+        firstNumber =  p1.val
+        p1 = p1.next
+      }
+      if(p2 && p2.val){
+        secondNumber =  p2.val
+        p2 = p2.next
+      }
 
 
+      let tempResult = Number(firstNumber) + Number(secondNumber)
+      // 将 tempResult 数字分解，如  tempResult = 1， tempResultArray = [1]; tempResult = 18, tempResultArray = [1, 8]
+      let tempResultArray = getNumber(tempResult)
+      let 个位数字 = 0
+      let 十位数字 = 0
+      if(tempResultArray.length === 1){
+        个位数字 = tempResultArray[0]
+      } else {
+        十位数字 = tempResultArray[0]
+        个位数字 = tempResultArray[1]
+      }
+      let newNode = new Node(前一位的十位 + 个位数字)
+      前一位的十位 = 十位数字
+      currentPoint.next = newNode
+      currentPoint = currentPoint.next
+    }
+    console.log(resultNode)
 
-  // log(assetHelper(d), ['d', 'c', 'b', 'a'])
+
+  }
+  test(number11, number21)
+
+
 
 </script>
 </body>
