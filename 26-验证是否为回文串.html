@@ -48,6 +48,27 @@
   console.assert(isRevertString(' ') === true)
 
 
+  function test(string){
+    let stringArray = string.split('')
+    let p1 = 0
+    let p2 = stringArray.length - 1
+    while(p1 < p2){
+      let char1 = stringArray[p1]
+      let char2 = stringArray[p2]
+      console.log('char1', char1);
+      console.log('char2', char2);
+      if(char1 === char2){
+        p1++
+        p2--
+      } else {
+        return false
+      }
+    }
+    return true
+  }
+  console.assert(test('amanaplanacanalpanama') === true)
+  console.assert(test('raceacar') === false)
+  console.assert(test(' ') === true)
 
 </script>
 </body>
