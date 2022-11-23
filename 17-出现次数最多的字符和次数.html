@@ -11,6 +11,8 @@
 <script>
 
   // ['a', 'b', 'c', 'a', 'a']  a=>3次
+  // ['a', 'b', 'c', 'a', 'a', 'b', 'b']  a=>3次， b=>3次
+  // 与 16 的集合法处理基本一致，属于重复题目
 
   function findMaxCharAndIndex (array){
     let map = {}
@@ -74,6 +76,8 @@
 
   console.log(_findMaxCharAndIndex(['a', 'b', 'c', 'a', 'a', 'b', 'b']));
   console.assert(JSON.stringify(_findMaxCharAndIndex(['a', 'b', 'c', 'a', 'a', 'b', 'b'])) === JSON.stringify({a: 3, b: 3}))
+
+
 </script>
 </body>
 </html>

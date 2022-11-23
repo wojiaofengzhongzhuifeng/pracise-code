@@ -11,6 +11,7 @@
 <script>
   // https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/
   /*
+  思路
   使用对撞双指针的思路解决
   0. 数组已经排好序！
   1. leftPoint = 0;rightPoint = array.length - 1
@@ -48,6 +49,25 @@
   console.assert(JSON.stringify(getTwoNumberIndex([2,7, 11, 15], 9)) === JSON.stringify([1,2]))
   console.assert(JSON.stringify(getTwoNumberIndex([2,3,4], 99)) === JSON.stringify([-1, -1]))
 
+
+  function test(haveSortArray, target){
+    let p1 = 0
+    let p2 = haveSortArray.length - 1
+    while(p1 < p2){
+      let smallNumber = haveSortArray[p1]
+      let bigNumber = haveSortArray[p2]
+      let sum = smallNumber + bigNumber
+      if(sum < target){
+        p1++
+      } else if(sum > target){
+        p2--
+      } else {
+        return [p1+ 1, p2+ 1]
+      }
+    }
+    return [-1, -1]
+  }
+  console.log(test([2,7, 11, 15], 9))
 
 
 </script>
