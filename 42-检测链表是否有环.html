@@ -70,9 +70,38 @@
     return false
   }
 
-  console.log(checkHaveCircle(a));
+  /*
+  难点：
+  1. 必须是 fast = fast.next.next， 不能是 fast = fast.next
+  为什么？
+  因为如果使用了 fast = fast.next ； 同时 slow = slow.next ，那么两个指针将永远不会相遇，因为步长是一致的，必须通过 fast = fast.next.next 让两个指针的步长不一致
+  */
+  function test(node){
 
-  console.log(checkHaveCircle(a1));
+
+    let slow = node
+    let fast = node.next
+    while(fast){
+
+      if(slow.val === fast.val){
+        // break
+        return true
+      }
+
+      slow = slow.next
+      if(fast.next && fast.next.next){
+        fast = fast.next.next
+      } else {
+        return false
+      }
+
+    }
+    return false
+  }
+
+  console.log(test(a));
+
+  console.log(test(a1));
 
 </script>
 </body>
