@@ -36,9 +36,14 @@
   e.next = f
 
 
-  // 输入 a, 2 => d
-  // 输入 a, 6 => a
-  // 双指针，先让fast 走，达到一定条件后，开始走slow
+
+  /*
+  当前链表结构：
+  a -> b -> c -> d -> e -> f
+  需求
+  1. 输入 a, 2 => e
+  2. 输入 a, 6 => a
+  */
   function findBackNode(head, index){
     let slow = null
     let fast = head
@@ -55,11 +60,33 @@
     return slow
   }
 
-  console.log(findBackNode(a, 2));
-  console.log(findBackNode(a, 0));
-  console.log(findBackNode(a, 1));
-  console.log(findBackNode(a, 5));
+  // console.log(findBackNode(a, 2));
+  // console.log(findBackNode(a, 0));
+  // console.log(findBackNode(a, 1));
+  // console.log(findBackNode(a, 5));
 
+
+
+  function test(head, index){
+    let slow = head
+    let fast = head
+    // 这个while 确定 fast 的起始节点
+    while(index){
+      fast = fast.next
+      index--
+    }
+
+    // 这个while 确定 slow
+    while(fast){
+      slow = slow.next
+      fast = fast.next
+    }
+    return slow
+  }
+  console.log(test(a, 2));
+  console.log(test(a, 0));
+  console.log(test(a, 1));
+  console.log(test(a, 5));
 
 
 
