@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // https://codesandbox.io/s/optimistic-silence-ood8vv?file=/src/index.js
+  function _new(){
+    let argumentList = Array.prototype.slice.call(arguments)
+    let consFn = argumentList[0]
+    let remainArguments = argumentList.slice(0)
+
+    let tempObj = {}
+    tempObj.__proto__ = consFn.prototype
+    let result = consFn.apply(tempObj, remainArguments)
+    return result instanceof Object ? result : tempObj
+  }
+</script>
+</body>
+</html>

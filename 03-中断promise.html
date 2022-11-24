@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  function axios(url){
+    return new Promise((resolve, reject)=>{
+      setTimeout(()=>{
+        reject(url + Math.random())
+      }, 1000)
+    })
+  }
+  function getPromiseWithCancel(originPromise) {
+    let cancel = (v) => {};
+    let isCancel = false;
+    const cancelPromise = new Promise(function (resolve, reject) {
+      cancel = e => {
+        isCancel = true;
+        reject(e);
+      };
+    });
+    const groupPromise = Promise.race([originPromise, cancelPromise])
+    .catch(e => {
+      if (isCancel) {
+        // 主动取消时，不触发外层的 catch
+        return new Promise(() => {});
+      } else {
+        return Promise.reject(e);
+      }
+    });
+    return Object.assign(groupPromise, { cancel });
+  }
+
+  // 使用如下
+  const originPromise = axios("fda");
+  const promiseWithCancel = getPromiseWithCancel(originPromise);
+  promiseWithCancel.then((data) => {
+    console.log('渲染数据', data);
+  });
+  setTimeout(()=>{
+    promiseWithCancel.cancel(); // 取消 Promise，将不会再进入 then() 渲染数据
+  }, 1500)
+
+
+</script>
+</body>
+</html>

@@ -12,6 +12,36 @@
 
 <script>
   // 完全默写出利用原型继承的至少 3 种方式
+  function Person(name){
+    this.name = name
+  }
+  Person.prototype.sayName = function (){
+    console.log(this.name)
+  }
+  let p1 = new Person('rjj')
+  p1.sayName()
+
+  function Student(name, grade){
+    this.grade = grade
+    Person.call(this, name)
+  }
+
+  // 方法1
+  // Student.prototype = new Person()
+
+  // 方法2
+  function Fn(){}
+  Fn.prototype = Person.prototype
+  Student.prototype = new Fn()
+
+
+  Student.prototype.study = function (){
+    console.log("study" + this.grade)
+  }
+
+  let s1 = new Student('xm','初一')
+  console.log(s1);
+  console.log(p1);
 </script>
 </body>
 </html>

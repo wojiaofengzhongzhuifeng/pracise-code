@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+  let eventBus = {
+    map: {},
+    bind: function (eventName, fn){
+      if(!this.map[eventName]){
+        this.map[eventName] = []
+      }
+      this.map[eventName].push(fn)
+    },
+    emit: function (){
+      const argumentList = Array.prototype.slice.call(arguments)
+      const [eventName, ...data] = argumentList
+      let fnList = this.map[eventName]
+      if(fnList){
+        fnList.forEach((fn)=>{
+          fn(...data)
+        })
+      }
+    },
+    unBind: function (eventName, fn){
+      const fnList = this.map[eventName]
+      let index = fnList.indexOf(fn)
+      fnList.splice(index, 1)
+    },
+    once: function (eventName, fn){
+      /*
+      从简单到答案
+      1. 在once 中调用bind
+      this.bind(eventName, fn)
+
+      2. 对fn 进行封装
+      const testFn = (...args)=>{
+        fn(...args)
+      }
+      this.bind(eventName, testFn)
+
+      3. 在封装函数执行remove 操作
+      const testFn = (...args)=>{
+        fn(...args)
+        this.unBind(eventName, fn)
+      }
+      this.bind(eventName, testFn)
+      */
+      const testFn = (...args)=>{
+        fn(...args)
+        this.unBind(eventName, fn)
+      }
+      this.bind(eventName, testFn)
+    },
+  }
+
+  function callback1(data1, data2){
+    console.log('callback1', data1, data2);
+  }
+  function callback2(data1, data2){
+    console.log('callback2', data1, data2);
+  }
+  eventBus.bind("test1", callback1)
+  eventBus.bind("test1", callback2)
+  eventBus.emit("test1", "fda", 'fjdka')
+  eventBus.unBind("test1", callback2)
+  eventBus.emit("test1", "fda", 'fjdka')
+
+  eventBus.once("test2", (data)=>{
+    console.log('once test', data);
+  })
+  eventBus.emit("test2", "test2 once")
+  eventBus.emit("test2", "test2 once")
+
+
+
+</script>
+</body>
+</html>
