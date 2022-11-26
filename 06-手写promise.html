@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+
+class MyPromise{
+  successData = null
+  errorMessage = null
+  status = 'pending'
+  successFn = null
+  failFun = null
+
+  constructor(fn) {
+    fn(this.fn1, this.fn2)
+  }
+  fn1 = (successData)=>{
+    this.status = 'success'
+    this.successData = successData
+    this.successFn && this.successFn(this.successData)
+  }
+  fn2 = (errorMessage)=>{
+    this.status = 'error'
+    this.errorMessage = errorMessage
+    this.failFun && this.failFun(this.errorMessage)
+
+  }
+  then = (fn1, fn2)=>{
+    if(this.status === 'success'){
+      fn1(this.successData)
+    } else if (this.status === 'error'){
+      fn2(this.errorMessage)
+    } else {
+      this.successFn = fn1
+      this.failFun = fn2
+      // setTimeout(()=>{
+      //   this.then(fn1,fn2)
+      // })
+    }
+  }
+}
+let p1 = new MyPromise((resolve, reject)=>{
+  // 函数调用
+  resolve("fdafdsa")
+})
+
+// 成功、失败函数的注册
+p1.then((data)=>{
+  console.log(data);
+}, (error)=>{
+  console.log(error);
+})
+
+
+let p2 = new MyPromise((resolve,reject)=>{
+  reject("reject")
+})
+p2.then((data)=>{
+  console.log(data);
+}, (error)=>{
+  console.log(error);
+})
+
+let p3 = new MyPromise((resolve, reject)=>{
+  let math = Math.random()
+  setTimeout(()=>{
+    if(math > 0.5 ){
+      resolve(math)
+    } else {
+      reject(math)
+    }
+  }, 2000)
+})
+p3.then((data)=>{
+  console.log('p3 success', data);
+}, (error)=>{
+  console.log('p3 error', error);
+})
+
+let p4 = new MyPromise((resolve, reject)=>{
+  let math = Math.random()
+  setTimeout(()=>{
+    if(math > 0.5 ){
+      resolve(math)
+    } else {
+      reject(math)
+    }
+  }, 2000)
+})
+p4.then((success)=>{
+  console.log(success);
+  return
+}, (fail)=>{
+  console.log(fail);
+}).then(()=>{})
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+function axios(url){
+  return new Promise((resolve, reject)=>{
+    let math = Math.random()
+    resolve(math)
+//			reject(math)
+
+  })
+}
+
+
+
+
+axios().then((successData)=>{
+  console.log('第一个then successData', successData)
+//   	throw new Error("fdafdsfdsfdsfdsa") // 核心
+}).catch((errorData)=>{
+  console.log('第一个then errorData', errorData)
+}).then((successData)=>{
+  console.log("第二个then successData", successData)
+}, (errorData)=>{
+  console.log("第二个then errorData", errorData)
+})
+
+
+</script>
+</body>
+</html>
