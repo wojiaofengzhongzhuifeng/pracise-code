@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<script>
+  function add(a, b, c, d){
+    return a + b+ c +d
+  }
+
+  function curry(fn, arr = []){
+    let fnLength = fn.length
+    return function(...args){
+      let array = [...arr, ...args]
+      if(fnLength > array.length){
+        return curry(fn, array)
+      } else {
+        return fn.apply(this, array)
+      }
+    }
+  }
+
+
+  // 使用
+  let curryAdd = curry(add)
+  let curryAdd1 = curryAdd(1)
+  console.log(curryAdd1(2, 3, 4));
+</script>
+</body>
+</html>
