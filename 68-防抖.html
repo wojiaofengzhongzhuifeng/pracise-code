@@ -17,7 +17,7 @@
     return ()=>{
 
       // 核心：为什么要加 clearTimeout(time) ？想通过 time 变量，删除原来的定时器
-      // clearTimeout(time)
+      clearTimeout(time)
       time = setTimeout(()=>{
         func(arguments)
       }, wait)

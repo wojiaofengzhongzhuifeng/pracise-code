@@ -23,8 +23,8 @@
           timer = null;
 
           // todo 为什么要使用 func.apply(context, args) ？直接用 func(args) 不行吗？
-          // func.apply(context, args)
-          func(args)
+          func.apply(context, args)
+          // func(args)
 
         }, wait)
       }
