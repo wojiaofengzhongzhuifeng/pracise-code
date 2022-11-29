@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<div style="height: 1000vh;border: 1px solid red;width:50px" id="test"></div>
+<script>
+
+ function throttle(func, wait) {
+   var timer;
+   return function() {
+     var context = this;
+     var args = arguments;
+
+     if (!timer) {
+       timer = setTimeout(function(){
+         timer = null;
+
+         // todo 为什么要使用 func.apply(context, args) ？直接用 func(args) 不行吗？
+         // func.apply(context, args)
+         func(args)
+
+       }, wait)
+     }
+   }
+ }
+  let scrollFn = (event)=>{
+    console.log(event);
+  }
+  let _scrollFn = throttle(scrollFn, 500)
+
+  window.addEventListener('scroll', _scrollFn)
+
+</script>
+</body>
+</html>
