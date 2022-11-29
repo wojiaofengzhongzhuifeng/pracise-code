@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  function person(a, b){
+    console.log(this.name, a, b);
+  }
+  var egg = {name: 'user'}
+
+  // 第一版实现：完成函数调用
+  Function.prototype._call1 = function(obj){
+    // 核心：这里的this 指的是什么？
+    console.log(this);
+    obj.jfkdjfkds = this // 为什么要挂载到 obj 上？因为要让 person 函数内部的this 指向egg
+    obj.jfkdjfkds()
+    delete obj.jfkdjfkds
+  }
+  // person._call1(egg) // 需求：调用 person 函数，且函数内this 为 egg 对象
+
+
+
+  // 第二版：使用 es6 语法，实现参数的传递
+  Function.prototype._call2 = function(obj){
+    // console.log('arguments', arguments); // person._call2 函数传入的参数
+    let remainArguments =  Array.prototype.slice.call(arguments, 1)
+    obj.jfkdjfkds = this
+    let result = obj.jfkdjfkds(...remainArguments)
+    delete obj.jfkdjfkds
+    return result
+  }
+  // person._call2(egg, 'a', 'b')
+
+
+  // apply 与call 基本一致，只有参数传递的不同
+  Function.prototype._apply = function(obj){
+    let remainArguments =  Array.prototype.slice.call(arguments, 1)
+    obj.jfkdjfkds = this
+    let result = obj.jfkdjfkds(remainArguments)
+    delete obj.jfkdjfkds
+    return result
+  }
+  person._apply(egg, 'a', 'b')
+
+</script>
+</body>
+</html>

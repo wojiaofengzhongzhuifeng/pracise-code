@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  function person(a, b){
+    console.log(this.name, a, b);
+    this.test = a
+  }
+  person.prototype.run = function (){
+    console.log(123);
+  }
+  var egg = {name: 'user'}
+
+  Function.prototype._bind1 = function(obj){
+    let argumemts1 = Array.prototype.slice.call(arguments, 1)
+    let _this = this // person 函数
+    let tempFn = function (){}
+    function returnFn(){
+      let arguments2 = Array.prototype.slice.call(arguments, 0)
+      let sumArguments = argumemts1.concat(arguments2)
+      if(!this instanceof returnFn){ // 核心
+        _this.apply(obj, sumArguments)
+      } else {
+        console.log('this', this);
+        _this.apply(this, sumArguments) // 核心
+      }
+    }
+    tempFn.prototype = _this.prototype
+    returnFn.prototype = new tempFn()
+    return returnFn
+  }
+
+  let newFn = person._bind1(egg , 1)
+  newFn(2)
+
+  let p = new newFn(2)
+  console.log('p', p);
+
+
+</script>
+</body>
+</html>
