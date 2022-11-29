@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<div style="height: 1000vh;border: 1px solid red;width:50px" id="test"></div>
+<script>
+
+  function debounce(func, wait) {
+    let time = null
+    return ()=>{
+
+      // 核心：为什么要加 clearTimeout(time) ？想通过 time 变量，删除原来的定时器
+      // clearTimeout(time)
+      time = setTimeout(()=>{
+        func(arguments)
+      }, wait)
+    }
+  }
+  let scrollFn = (event)=>{
+    console.log(event);
+  }
+  let _scrollFn = debounce(scrollFn, 500)
+
+  window.addEventListener('scroll', _scrollFn)
+
+</script>
+</body>
+</html>

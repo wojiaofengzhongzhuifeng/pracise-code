@@ -12,21 +12,28 @@
 <div style="height: 1000vh;border: 1px solid red;width:50px" id="test"></div>
 <script>
 
-  function debounce(func, wait) {
-    let time = null
-    return ()=>{
+  function throttle(func, wait) {
+    var timer;
+    return function() {
+      var context = this;
+      var args = arguments;
 
-      // 核心：为什么要加 clearTimeout(time) ？想通过 time 变量，删除原来的定时器
-      // clearTimeout(time)
-      time = setTimeout(()=>{
-        func(arguments)
-      }, wait)
+      if (!timer) {
+        timer = setTimeout(function(){
+          timer = null;
+
+          // todo 为什么要使用 func.apply(context, args) ？直接用 func(args) 不行吗？
+          // func.apply(context, args)
+          func(args)
+
+        }, wait)
+      }
     }
   }
   let scrollFn = (event)=>{
     console.log(event);
   }
-  let _scrollFn = debounce(scrollFn, 500)
+  let _scrollFn = throttle(scrollFn, 500)
 
   window.addEventListener('scroll', _scrollFn)
 
