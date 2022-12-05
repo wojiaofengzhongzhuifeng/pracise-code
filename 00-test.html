@@ -9,24 +9,51 @@
 </head>
 <body>
 <script>
-  function Person(name){
-    this.name = name
+  function axios(url){
+    return new Promise((resolve, reject)=>{
+      setTimeout(()=>{
+        const data = {
+          a: 1,
+          url
+        }
+        resolve(data)
+      }, 1000)
+    })
   }
-  Person.prototype.run = function(){
-    console.log("run")
-  }
-  let p = _new(Person, "rjj")
 
-  function _new(){
-    let argumentList = [].slice.call(arguments, 0)
-    let consFn = argumentList[0]
-    let remainArgumentList = argumentList.slice(1)
 
-    let temp = {}
-    temp.__proto__ = consFn.prototype
-    let result = consFn.apply(temp, remainArgumentList)
-    return result instanceof Object ? result : temp
+  const originPromise = axios("url");
+
+  function test(originalPromise){
+    let cancel
+
+    let cancelPromise = new Promise((resolve, reject)=>{
+      cancel = (e)=>{
+        reject(e)
+      }
+    })
+
+    let fasterPromise = Promise.race([originalPromise, cancelPromise])
+
+    return Object.assign(fasterPromise, {cancel})
   }
+
+  let wrapperPromise = test(originPromise)
+
+
+  wrapperPromise.then((data) => {
+    console.log('渲染数据', data);
+  })
+
+  // setTimeout(()=>{
+  //   wrapperPromise.cancel("取消")
+  // }, 2000)
+
+  // wrapperPromise.cancel("取消了")
+
+
+
+
 </script>
 </body>
 </html>

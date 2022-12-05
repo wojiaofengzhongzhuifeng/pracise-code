@@ -16,7 +16,7 @@
       }, 1000)
     })
   }
-  // 最简单的实现
+  // 最简单的实现: 只处理axios 成功情况
   function getPromiseWithCancel1(originPromise){
     let cancel
     const cancelPromise = new Promise(function (resolve, reject) {
@@ -28,8 +28,8 @@
     return Object.assign(groupPromise, { cancel });
   }
 
-  // 更完善的实现
-  function getPromiseWithCancel(originPromise) {
+  // 更完善的实现：区分 axios 失败与 cancel 失败情况
+  function getPromiseWithCancel2(originPromise) {
     let cancel = (v) => {};
     let isCancel = false;
     const cancelPromise = new Promise(function (resolve, reject) {
@@ -68,7 +68,7 @@
   });
   setTimeout(()=>{
     promiseWithCancel2.cancel(); // 取消 Promise，将不会再进入 then() 渲染数据
-  }, 2000)
+  }, 500)
 
 
 </script>
