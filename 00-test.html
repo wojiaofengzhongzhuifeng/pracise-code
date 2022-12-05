@@ -9,49 +9,56 @@
 </head>
 <body>
 <script>
-  function axios(url){
-    return new Promise((resolve, reject)=>{
-      setTimeout(()=>{
-        const data = {
-          a: 1,
-          url
-        }
-        resolve(data)
-      }, 1000)
-    })
-  }
+  /*
+  * {
+  *   event1: [fn1, fn2, fn3],
+  *   event2: [fn4, fn5]
+  * }
+  * */
 
-
-  const originPromise = axios("url");
-
-  function test(originalPromise){
-    let cancel
-
-    let cancelPromise = new Promise((resolve, reject)=>{
-      cancel = (e)=>{
-        reject(e)
+  class Event{
+    map = {}
+    add = (eventName, fn)=>{
+      if(!this.map[eventName]){
+        this.map[eventName] = []
       }
-    })
+      this.map[eventName].push(fn)
+    }
+    triggle = (eventName, ...reset)=>{
+      if(!this.map[eventName]){throw new Error("未注册事件" + eventName)}
+      console.log(reset);
+      let needTodoFnList = this.map[eventName]
+      console.log(needTodoFnList);
 
-    let fasterPromise = Promise.race([originalPromise, cancelPromise])
+      needTodoFnList.forEach((fn)=>{
+        fn(...reset)
+      })
+    }
+    once = (eventName, fn)=>{
+      const testFn = ()=>{
+        fn(...arguments)
+        this.remove(eventName, testFn)
+      }
+      this.add(eventName, testFn)
+    }
+    remove = (eventName, fn)=> {
+      let fnList = this.map[eventName]
+      let index = fnList.indexOf(fn)
+      fnList.splice(index, 1)
+    }
 
-    return Object.assign(fasterPromise, {cancel})
   }
 
-  let wrapperPromise = test(originPromise)
+  let event = new Event()
 
-
-  wrapperPromise.then((data) => {
-    console.log('渲染数据', data);
+  event.add("event1", (data)=>{
+    console.log("event1", data);
+  })
+  event.add("event1", (data)=>{
+    console.log("event11", data);
   })
 
-  // setTimeout(()=>{
-  //   wrapperPromise.cancel("取消")
-  // }, 2000)
-
-  // wrapperPromise.cancel("取消了")
-
-
+  event.triggle("event1", {name: 1},  {name: 2})
 
 
 </script>

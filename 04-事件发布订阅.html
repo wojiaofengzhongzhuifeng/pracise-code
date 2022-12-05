@@ -54,29 +54,34 @@
       */
       const testFn = (...args)=>{
         fn(...args)
-        this.unBind(eventName, fn)
+        this.unBind(eventName, testFn)
       }
       this.bind(eventName, testFn)
     },
   }
 
-  function callback1(data1, data2){
-    console.log('callback1', data1, data2);
-  }
-  function callback2(data1, data2){
-    console.log('callback2', data1, data2);
-  }
-  eventBus.bind("test1", callback1)
-  eventBus.bind("test1", callback2)
-  eventBus.emit("test1", "fda", 'fjdka')
-  eventBus.unBind("test1", callback2)
-  eventBus.emit("test1", "fda", 'fjdka')
+  // function callback1(data1, data2){
+  //   console.log('callback1', data1, data2);
+  // }
+  // function callback2(data1, data2){
+  //   console.log('callback2', data1, data2);
+  // }
+  // eventBus.bind("test1", callback1)
+  // eventBus.bind("test1", callback2)
+  // eventBus.emit("test1", "fda", 'fjdka')
+  // eventBus.unBind("test1", callback2)
+  // eventBus.emit("test1", "fda", 'fjdka')
 
+  // todo 这样写测试用例，会报错，期待执行 once test 和 test2 test ，但是只执行了 once test
   eventBus.once("test2", (data)=>{
     console.log('once test', data);
   })
-  eventBus.emit("test2", "test2 once")
-  eventBus.emit("test2", "test2 once")
+  eventBus.bind("test2", (data)=>{
+    console.log('test2 test', data);
+  })
+  // eventBus.emit("test2", "222")
+  eventBus.emit("test2", "1111")
+  // eventBus.emit("test2", "1111")
 
 
 
