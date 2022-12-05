@@ -16,51 +16,76 @@
   * }
   * */
 
-  class Event{
-    map = {}
-    add = (eventName, fn)=>{
-      if(!this.map[eventName]){
-        this.map[eventName] = []
-      }
-      this.map[eventName].push(fn)
-    }
-    triggle = (eventName, ...reset)=>{
-      if(!this.map[eventName]){throw new Error("未注册事件" + eventName)}
-      console.log(reset);
-      let needTodoFnList = this.map[eventName]
-      console.log(needTodoFnList);
+  var list = [
+    {id: 8, name: '子元素8', pid: 6},
 
-      needTodoFnList.forEach((fn)=>{
-        fn(...reset)
-      })
-    }
-    once = (eventName, fn)=>{
-      const testFn = ()=>{
-        fn(...arguments)
-        this.remove(eventName, testFn)
-      }
-      this.add(eventName, testFn)
-    }
-    remove = (eventName, fn)=> {
-      let fnList = this.map[eventName]
-      let index = fnList.indexOf(fn)
-      fnList.splice(index, 1)
-    }
+    {id: 1, name: '根元素', pid: null},
+    {id: 2, name: '子元素2', pid: 1},
+    {id: 3, name: '子元素3', pid: 2},
+    {id: 4, name: '子元素4', pid: 2},
+    {id: 5, name: '子元素5', pid: 1},
+    {id: 6, name: '子元素6', pid: 3},
+    {id: 7, name: '子元素7', pid: 2},
 
-  }
+  ]
 
-  let event = new Event()
+   var tree = {
+     id: 1,
+     name: '根元素',
+     children: [
+       {
+         id: 2,
+         name: '子元素2',
+         children: [
+           {
+             id: 3,
+             name: '子元素3',
+             children: [
+               {
+                 id: 6,
+                 name: '子元素6',
+                 children: [
+                   {
+                     id: 8,
+                     name: '子元素8',
+                   }
+                 ]
+               }
+             ]
+           },
+           {
+             id: 4,
+             name: '子元素4',
+           },
+           {
+             id: 7,
+             name: '子元素7',
+           },
+         ]
+       },
 
-  event.add("event1", (data)=>{
-    console.log("event1", data);
-  })
-  event.add("event1", (data)=>{
-    console.log("event11", data);
-  })
-
-  event.triggle("event1", {name: 1},  {name: 2})
+       {
+         id: 5,
+         name: '子元素5',
+       },
+     ]
+   }
 
 
+   function test(array){
+    // {id: 8, name: '子元素8', pid: 6} =》{id: 8, name: '子元素8', children: [{}]}
+     array.forEach((item1)=>{
+       let childrenList = array.filter((item2)=>{
+         if(item1.id === item2.pid){
+           return true
+         }
+       })
+       item1.children = childrenList
+     })
+     return array
+   }
+  test(list)
+  console.log(list);
 </script>
 </body>
 </html>
