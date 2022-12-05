@@ -12,25 +12,21 @@
   function Person(name){
     this.name = name
   }
-  Person.prototype.run = function (){
-    console.log(this.name + "is running")
+  Person.prototype.run = function(){
+    console.log("run")
   }
+  let p = _new(Person, "rjj")
 
-  function Student(name, grade){
-    Person.call(this, name)
+  function _new(){
+    let argumentList = [].slice.call(arguments, 0)
+    let consFn = argumentList[0]
+    let remainArgumentList = argumentList.slice(1)
+
+    let temp = {}
+    temp.__proto__ = consFn.prototype
+    let result = consFn.apply(temp, remainArgumentList)
+    return result instanceof Object ? result : temp
   }
-
-  // Student.prototype = new Person()
-
-  function fn(){}
-  fn.prototype = Person.prototype
-  Student.prototype = new fn()
-  // Student.prototype = Person.prototype
-
-  Student.prototype.study = function (){
-    console.log(this.name + "is study")
-  }
-  let s = new Student("na")
 </script>
 </body>
 </html>
