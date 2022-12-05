@@ -8,84 +8,45 @@
   <title>Document</title>
 </head>
 <body>
+
+
 <script>
-  /*
-  * {
-  *   event1: [fn1, fn2, fn3],
-  *   event2: [fn4, fn5]
-  * }
-  * */
+  function axios(url, time, isError){
+    return new Promise((resolve, reject)=>{
+      setTimeout(()=>{
+        if(isError){
+          reject(url + "后台出错")
+        } else{
+          resolve(url + "后台")
+        }
+      }, time)
+    })
+  }
+  let p1 = axios("test1", 1000)
+  let p2 = axios("test2", 2000, )
+  let p3 = axios("test3", 3000)
 
-  var list = [
-    {id: 8, name: '子元素8', pid: 6},
+  all([p1, p2, p3]).then((resultList)=>{
+    console.log(resultList);
+  }).catch((error)=>{
+    console.log('error', error);
+  })
+  function all(promiseList){
+    let result = []
+    return new Promise((resolve, reject)=>{
+      promiseList.forEach((promiseItem)=>{
+        promiseItem.then((data)=>{
+          result.push(data)
+          if(result.length === promiseList.length){
+            resolve(result)
+          }
+        }).catch((error)=>{
+          reject(error)
+        })
+      })
+    })
 
-    {id: 1, name: '根元素', pid: null},
-    {id: 2, name: '子元素2', pid: 1},
-    {id: 3, name: '子元素3', pid: 2},
-    {id: 4, name: '子元素4', pid: 2},
-    {id: 5, name: '子元素5', pid: 1},
-    {id: 6, name: '子元素6', pid: 3},
-    {id: 7, name: '子元素7', pid: 2},
-
-  ]
-
-   var tree = {
-     id: 1,
-     name: '根元素',
-     children: [
-       {
-         id: 2,
-         name: '子元素2',
-         children: [
-           {
-             id: 3,
-             name: '子元素3',
-             children: [
-               {
-                 id: 6,
-                 name: '子元素6',
-                 children: [
-                   {
-                     id: 8,
-                     name: '子元素8',
-                   }
-                 ]
-               }
-             ]
-           },
-           {
-             id: 4,
-             name: '子元素4',
-           },
-           {
-             id: 7,
-             name: '子元素7',
-           },
-         ]
-       },
-
-       {
-         id: 5,
-         name: '子元素5',
-       },
-     ]
-   }
-
-
-   function test(array){
-    // {id: 8, name: '子元素8', pid: 6} =》{id: 8, name: '子元素8', children: [{}]}
-     array.forEach((item1)=>{
-       let childrenList = array.filter((item2)=>{
-         if(item1.id === item2.pid){
-           return true
-         }
-       })
-       item1.children = childrenList
-     })
-     return array
-   }
-  test(list)
-  console.log(list);
+  }
 </script>
 </body>
 </html>

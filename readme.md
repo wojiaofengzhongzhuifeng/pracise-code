@@ -5,3 +5,5 @@
 - 中断promise
 
 - eventbus once 的实现
+
+- 手写promise ，实现链式调用

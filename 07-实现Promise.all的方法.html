@@ -8,30 +8,46 @@
   <title>Document</title>
 </head>
 <body>
+
+
 <script>
-function axios(url){
-  return new Promise((resolve, reject)=>{
-    let math = Math.random()
-    resolve(math)
-//			reject(math)
 
+  function all(promiseList){
+
+    return new Promise((resolve, reject)=>{
+      let result = []
+      promiseList.forEach((promiseItem)=>{
+        console.log(promiseItem);
+        promiseItem.then((data)=>{
+          result.push(data)
+          if(result.length === promiseList.length){
+            resolve(result)
+          }
+        }).catch((error)=>{
+          reject(error)
+        })
+      })
+    })
+  }
+  function axios(url, time, isError){
+    return new Promise((resolve, reject)=>{
+      setTimeout(()=>{
+        if(isError){
+          reject(url + "后台出错")
+        } else{
+          resolve(url + "后台")
+        }
+      }, time)
+    })
+  }
+  let p1 = axios("test1", 1000)
+  let p2 = axios("test2", 2000,)
+  let p3 = axios("test3", 3000)
+  all([p1, p2, p3]).then((resultList)=>{
+    console.log(resultList);
+  }).catch((error)=>{
+    console.log('error', error);
   })
-}
-
-
-
-
-axios().then((successData)=>{
-  console.log('第一个then successData', successData)
-//   	throw new Error("fdafdsfdsfdsfdsa") // 核心
-}).catch((errorData)=>{
-  console.log('第一个then errorData', errorData)
-}).then((successData)=>{
-  console.log("第二个then successData", successData)
-}, (errorData)=>{
-  console.log("第二个then errorData", errorData)
-})
-
 
 </script>
 </body>
