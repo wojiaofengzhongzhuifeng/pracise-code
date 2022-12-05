@@ -28,7 +28,7 @@
       if(!this instanceof returnFn){ // 核心
         _this.apply(obj, sumArguments)
       } else {
-        console.log('this', this);
+        console.log('this', this); // 这里的this是bind 后函数的实例，比如let funBind=fun.bind(xxx);new funBind()
         _this.apply(this, sumArguments) // 核心
       }
     }
@@ -42,6 +42,8 @@
 
   let p = new newFn(2)
   console.log('p', p);
+
+
 
 
 </script>
