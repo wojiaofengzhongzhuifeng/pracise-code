@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<script>
+  // todo
+  function deepClone(data){
+    let result = {}
+
+    Object.keys(data).forEach((key)=>{
+      let value = data[key]
+      if(!value instanceof Object){
+        result[value]
+        return value
+      } else {
+
+      }
+    })
+  }
+
+  let obj = {
+    obj: 1,
+    obj1:{a:2}
+    // array: [1],
+    // fn: function (){
+    //   console.log(1);
+    // }
+  }
+  deepClone(obj)
+
+</script>
+</body>
+</html>

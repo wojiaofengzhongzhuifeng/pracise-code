@@ -7,3 +7,9 @@
 - eventbus once 的实现
 
 - 手写promise ，实现链式调用
+
+- promise 并发限制不会
+
+- 科里化
+
+- 深拷贝

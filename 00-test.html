@@ -11,42 +11,29 @@
 
 
 <script>
-  function axios(url, time, isError){
-    return new Promise((resolve, reject)=>{
-      setTimeout(()=>{
-        if(isError){
-          reject(url + "后台出错")
-        } else{
-          resolve(url + "后台")
-        }
-      }, time)
-    })
-  }
-  let p1 = axios("test1", 1000)
-  let p2 = axios("test2", 2000, )
-  let p3 = axios("test3", 3000)
+  // [1,4,3,2,5, 10, 2,8]
+  // [] 1 [4, 3,2,5,10,2,8]
 
-  all([p1, p2, p3]).then((resultList)=>{
-    console.log(resultList);
-  }).catch((error)=>{
-    console.log('error', error);
-  })
-  function all(promiseList){
-    let result = []
-    return new Promise((resolve, reject)=>{
-      promiseList.forEach((promiseItem)=>{
-        promiseItem.then((data)=>{
-          result.push(data)
-          if(result.length === promiseList.length){
-            resolve(result)
-          }
-        }).catch((error)=>{
-          reject(error)
-        })
-      })
-    })
+  function sort(array){
+    if(array.length === 0){return []}
+    if(array.length === 1){return [array[0]]}
+    let firstNumber = array[0]
 
+    let leftArray = [], rightArray = []
+
+    array.forEach((number, index)=>{
+      if(index === 0){return}
+      if(number > firstNumber){
+        rightArray.push(number)
+      } else {
+        leftArray.push(number)
+      }
+    })
+    return sort(leftArray).concat(firstNumber).concat(sort(rightArray))
   }
+
+  let result = sort([1,4,3,2,5, 10, 2,8])
+  console.log(result);
 </script>
 </body>
 </html>
