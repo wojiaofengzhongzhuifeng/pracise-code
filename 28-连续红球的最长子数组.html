@@ -9,35 +9,43 @@
 </head>
 <body>
 
-<img src="./.readme_images/7092733c.png" alt="">
 <script>
+  // 滑动窗口法：与 18 类似
   /*
   获取最大红球的数量，0 表示白球；1 表示红球
   [1, 0, 1, 1, 1, 0, 0, 1, 1, 1,1, 0, 0, ] 应该返回 4
   */
-  function getMaxLength(array){
-    let left = 0
-    let right = 0
-    let currentReulstArray = []
-    let resultNumber = 0
-    while(right < array.length){
-      currentReulstArray.push(array[right])
-
-      while(currentReulstArray.filter((num)=>num === 0).length !== 0){
-        currentReulstArray.shift()
-        left ++
-      }
-      resultNumber = Math.max(resultNumber, currentReulstArray.length)
-      right++
+  function test2(array){
+    let p1 = 0
+    let p2 = 1
+    let preChar = array[0]
+    let resultIndex = {
+      0: [],
+      1: [],
     }
-    return resultNumber
+    while(p2 <= array.length){
+      let char2 = array[p2]
+      if(preChar === char2 ){
+        p2++
+
+      } else {
+
+        resultIndex[preChar].push([p1, p2])
+        p1 = p2
+        p2 = p1 + 1
+
+      }
+      preChar = char2
+
+    }
+    console.log(resultIndex);
   }
 
 
 
-  console.assert(getMaxLength([1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0,]) === 4);
-  console.assert(getMaxLength([0]) === 0);
-  console.assert(getMaxLength([1]) === 1);
+  console.assert(test2([1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0,]) === 4);
+  // console.assert(test2([0]) === 0);
+  // console.assert(test2([1]) === 1);
 
 </script>
 </body>

@@ -100,10 +100,10 @@
   // 双指针法 滑动窗口
   function test2(array){
     let p1 = 0
-    let p2 = 0
-    let preChar = ''
+    let p2 = 1
+    let preChar = array[0]
     let resultIndex = []
-    while(p2 < array.length){
+    while(p2 <= array.length){
       let char2 = array[p2]
       if(preChar !== char2 ){
         p2++
