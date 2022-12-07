@@ -42,6 +42,23 @@
   console.assert(findIndexInArray([1,3,4,7, 10 ,14],14) === 5 )
   console.assert(findIndexInArray([1,3,4,7, 10 ,14],11) === -1)
 
+
+
+  function findIndexInArray1(array, number, sumIndex = 0){
+    if(array.length === 0){return -1}
+    let middleIndex = Math.floor(array.length / 2)
+    let leftArray = array.slice(0, middleIndex)
+    let righrArray = array.slice(middleIndex + 1)
+    let middleNumber = array[middleIndex]
+    if(middleNumber > number){
+      return findIndexInArray(leftArray, number)
+    } else if(middleNumber < number){
+      return findIndexInArray(righrArray, number, middleIndex + 1)
+    } else {
+      return middleIndex + sumIndex
+    }
+  }
+
 </script>
 </body>
 </html>
