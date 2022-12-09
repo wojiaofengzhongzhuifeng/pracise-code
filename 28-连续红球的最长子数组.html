@@ -15,6 +15,7 @@
   获取最大红球的数量，0 表示白球；1 表示红球
   [1, 0, 1, 1, 1, 0, 0, 1, 1, 1,1, 0, 0, ] 应该返回 4
   */
+  // 方法1： 记录下标
   function test2(array){
     let p1 = 0
     let p2 = 1
@@ -42,10 +43,40 @@
   }
 
 
+  // 方法2：根据下标生成滑动窗口数组
+  function test22(array){
+    let p1 = 0,p2 = 0, result = [],windowArray = []
+    function isLegalWindowArray (array){
+      if (array.length <= 1){
+        return true
+      } else {
+        return array[array.length - 1] === array[array.length - 2];
+      }
+    }
+    while(p2<=array.length ){
+      windowArray = array.slice(p1, p2)
+      if(isLegalWindowArray(windowArray)){
+        p2++
+      } else {
+        let newWindowArray = windowArray.slice(0, windowArray.length - 1)
+        result.push(newWindowArray)
+        p1 = p2 - 1
+        p2 = p1 + 1
+      }
 
-  console.assert(test2([1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0,]) === 4);
-  // console.assert(test2([0]) === 0);
-  // console.assert(test2([1]) === 1);
+    }
+    if(windowArray.length !== 0){
+      result.push(windowArray)
+    }
+    console.log(result);
+  }
+
+
+
+  // test22([1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0,])
+  // test22([1, 0, 1, 1, 1, 0, 0, 1, 1, 1,1, 1, 1,1,1])
+  test22([1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0,1])
+//
 
 </script>
 </body>

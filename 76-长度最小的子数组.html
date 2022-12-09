@@ -10,6 +10,37 @@
 <body>
 <script>
   // https://leetcode.cn/problems/minimum-size-subarray-sum/
+
+
+
+  function test(array, sum){
+
+    let p1 = 0
+    let p2 = p1 + 1
+    let result = []
+    let windowArray = []
+
+    function isLegalWindowArray(array, sum){
+      let arraySum = array.reduce((a, b)=>{return a += b}, 0)
+      return arraySum === sum;
+
+    }
+
+    while(p1 <= array.length ){
+      while (p2<=array.length){
+        windowArray = array.slice(p1, p2)
+        if(isLegalWindowArray(windowArray, sum)){
+          result.push(windowArray)
+        }
+        p2++
+      }
+      p1++
+      p2 = p1 + 1
+    }
+    console.log(windowArray);
+    console.log(result);
+  }
+  test([2,3,1,2,4,3], 7)
 </script>
 </body>
 </html>

@@ -121,7 +121,30 @@
   }
   // 双指针法 滑动窗口2
   function test3(array){
+    let p1 = 0, p2 = 0, result = [],windowArray = []
+    function isLegalWindowArray (array){
+      if (array.length <= 1){
+        return true
+      } else {
+        return array[array.length - 1] !== array[array.length - 2];
+      }
+    }
 
+    while(p2 <=array.length ){
+      windowArray = array.slice(p1, p2)
+      if(isLegalWindowArray(windowArray)){
+        p2++
+      } else {
+        let newWindowArray = windowArray.slice(0, windowArray.length - 1)
+        result.push(newWindowArray)
+        p1 = p2 - 1
+        p2 = p1 + 1
+      }
+    }
+    if(windowArray.length !==0){
+      result.push(windowArray)
+    }
+    console.log(result);
   }
 
   console.log(test1(['a', 'b', 'b', 'b', 'c', 'd', 'e', 'b', 'b', 'a']));

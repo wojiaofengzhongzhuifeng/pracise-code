@@ -8,35 +8,14 @@
   <title>Document</title>
 </head>
 <body>
+<div class="test">123</div>
 <script>
-/*
-*   获取最大红球的数量，0 表示白球；1 表示红球
-  [1, 0, 1, 1, 1, 0, 0, 1, 1, 1,1, 0, 0, ] 应该返回 4
-* */
 
-function test2(array){
-  let p1 = 0
-  let p2 = 1
-  let preNumber = array[0]
-  let result = {
-    0: [],
-    1: []
+  function test(array, sum){
+    let p1 = 0 , p2 = 0
   }
-  while(p2 <= array.length ){
-    let currentNumber = array[p2]
-    if(currentNumber === preNumber){
-      p2++
-    } else {
+  test([2,3,1,2,4,3], 7)
 
-      result[preNumber].push([p1, p2])
-      p1 = p2
-      p2 = p1 + 1
-    }
-    preNumber = currentNumber
-  }
-  console.log(result);
-}
-test2(  [1, 0, 1, 1, 1, 0, 0, 1, 1, 1,1, 0, 0, ] )
 </script>
 </body>
 </html>
