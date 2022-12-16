@@ -8,31 +8,52 @@
   <title>Document</title>
 </head>
 <body>
+
 <script>
-  // todo
-  function deepClone(data){
-    let result = {}
-
-    Object.keys(data).forEach((key)=>{
-      let value = data[key]
-      if(!value instanceof Object){
-        result[value]
-        return value
-      } else {
-
+  function deepClone(obj, hash = new Map()){
+    if(typeof obj !== 'object'){return obj}
+    if(obj instanceof RegExp){return new RegExp(obj)}
+    if(obj instanceof Date){return new Date(obj)}
+    if(hash.get(obj)){
+      return hash.get(obj)
+    }
+    let newObj = new obj.constructor()
+    hash.set(obj, newObj)
+    for (const objKey in obj) {
+      if(obj.hasOwnProperty(objKey)){
+        newObj[objKey] = deepClone(obj[objKey])
       }
-    })
+    }
+    return newObj
   }
+  // 从简单到复杂：
+  /*
+  * 1. 处理单层纯对象 + 处理数组 + 普通值
+  * 2. 多层纯对象
+  * 3. 处理日期，正则
+  * 4. 处理循环依赖
 
-  let obj = {
-    obj: 1,
-    obj1:{a:2}
-    // array: [1],
-    // fn: function (){
-    //   console.log(1);
-    // }
+  * */
+  //单层纯对象 + 处理数组
+  let test = {a: 1}
+  let _test = deepClone(test)
+  console.log(_test);
+
+  //多层纯对象
+  let test1 = {
+    a:1,
+    b: {
+      a: 2,
+      cc:
+        {aaa: 1}
+    }
   }
-  deepClone(obj)
+  let _test1 = deepClone(test1)
+  console.log(_test1);
+
+  //  处理日期，正则
+
+
 
 </script>
 </body>

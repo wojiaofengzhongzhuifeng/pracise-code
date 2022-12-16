@@ -20,9 +20,17 @@
       this.needToRunPromiseList = []
     }
 
+    // 这里不一定需要返回一个promise，这里使用promise 的原因是需要接受函数，也可以直接
+    /*
+    add(url, fn){
+      this.needToRunPromiseList.push({url, fn})
+      this.run()
+    }
+    */
     add = (url)=>{
       return new Promise((resolve)=>{
         this.needToRunPromiseList.push([url, resolve])
+
         this.run()
       })
     }
@@ -31,7 +39,6 @@
       if(this.currentRunNumber === this.limitNumber || this.needToRunPromiseList.length === 0){
         return
       }
-
       const [url, resolve] = this.needToRunPromiseList.shift()
       this.currentRunNumber++;
 
@@ -51,6 +58,7 @@
       console.log(result);
     });
   }
+  // myQueue1.run()
 </script>
 </body>
 </html>

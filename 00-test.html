@@ -6,33 +6,137 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <style>
+    .infinite-list-window{
+      overflow: auto;
+      position: relative;
+    }
+    .infinite-list {
+      left: 0;
+      right: 0;
+      top: 0;
+      position: absolute;
+      text-align: center;
+      border:1px solid red;
+    }
+    .infinite-list-item {
+      height: 50px;
+      color: #555;
+      box-sizing: border-box;
+      border-bottom: 1px solid #999;
+    }
+    .infinite-list-phantom {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      z-index: -1;
+    }
+
+
+  </style>
 </head>
 <body>
+<p>other content</p>
+<div class="infinite-list-window" style="border: 1px solid red">
+
+  <!--  核心-->
+  <div class="infinite-list-phantom"></div>
+
+  <div class="infinite-list" style="border: 1px solid ">
+  </div>
+</div>
+<p>other content</p>
+<div class="list-window" style="height:500px;overflow-y: auto">
+  <div class="list" style="border: 1px solid ">
+  </div>
+</div>
+
+
 <script>
-  function test(m, n){
-    let arrayArray = []
+  let itemHeight = 50
+  let windowShowNumber = 10
+  let allDataNumber = 1000
+  let infiniteListWindow = document.querySelector('.infinite-list-window')
+  let infiniteList = document.querySelector('.infinite-list')
+  let list = document.querySelector('.list')
+  let listWindow = document.querySelector('.list-window')
+  let infiniteListPhantom = document.querySelector('.infinite-list-phantom')
+  let startIndex = 0 // 表示开始展示的 index
+  let showDataList = []
+  for(let i=0;i<=allDataNumber;i++){
+    showDataList.push(i)
+  }
 
-    for(let i=0;i<=m - 1;i++){
-      let array = [1]
-      arrayArray.push(array)
+  // 设置初始 css 与设置初始渲染item
+  infiniteList.setAttribute('style', `height: ${allDataNumber * itemHeight}px`)
+  infiniteListWindow.setAttribute('style', `height: ${windowShowNumber * itemHeight}px`)
+  removeAndCreateAndAppendInfiniteItem(startIndex)
+  for (let i=0;i<=allDataNumber;i++){
+    let div = document.createElement('div')
+    div.innerText = i
+    list.append(div)
+  }
+  infiniteListPhantom.setAttribute("style", `height: ${allDataNumber * itemHeight}px`)
+
+  // 监听 infiniteListWindow scroll
+  infiniteListWindow.addEventListener("scroll", (e)=>{
+    let scrollTop = infiniteListWindow.scrollTop
+    let startOffsetTop = scrollTop
+    let test = scrollTop - (scrollTop % itemHeight) // 核心
+    infiniteList.setAttribute('style', `transform: translate3d(0,${test}px,0);`)
+
+    let newStartIndex = Math.floor( scrollTop / itemHeight )
+
+    removeAndCreateAndAppendInfiniteItem(newStartIndex)
+  })
+
+
+
+  function removeAndCreateAndAppendInfiniteItem(startIndex){
+    infiniteList.innerHTML = ''
+    let endIndex = startIndex + windowShowNumber
+    let needToShowDataList = showDataList.slice(startIndex, endIndex)
+    for(let i=0;i<=needToShowDataList.length - 1;i++){
+      let div = document.createElement('div')
+      div.innerText = needToShowDataList[i]
+      div.className = 'infinite-list-item'
+      infiniteList.append(div)
     }
-
-    for(let i=0;i<=n - 1;i++){
-      arrayArray[0][i] = 1
-    }
-
-
-
-
-    for(let i=1;i<m;i++){
-      for(let j = 1;j<n;j++){
-        arrayArray[i][j] = arrayArray[i - 1][j] + arrayArray[i][j - 1]
-      }
-    }
-    console.log(arrayArray);
 
   }
-  test(3, 7)
+
+
+
+
 </script>
+
+
+
+<!--<script>-->
+<!--  let itemHeight = 50-->
+<!--  let totalDataNumber = 1000-->
+<!--  let list = document.querySelector('.infinite-list')-->
+<!--  let container = document.querySelector('.infinite-list-window')-->
+
+<!--  for (let i=0;i<=totalDataNumber;i++){-->
+<!--    let div = document.createElement('div')-->
+<!--    div.innerText = i-->
+<!--    list.append(div)-->
+<!--  }-->
+<!--  -->
+<!--  container.set-->
+
+<!--  container.addEventListener('scroll', (e)=>{-->
+<!--    console.log(e);-->
+<!--    console.log(e.scrollTop);-->
+<!--  })-->
+
+
+
+
+
+
+<!--</script>-->
 </body>
 </html>
