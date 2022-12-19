@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<img src=".readme_images/2289c9c5.png" alt="">
+<script>
+  // https://www.nowcoder.com/practice/20ef0972485e41019e39543e8e895b7f
+  /*
+  * 与25 题相似，但是初始条件不同，导致解决方法不同,
+  * */
+  /**
+   *
+   * @param numbers int整型一维数组
+   * @param target int整型
+   * @return int整型一维数组
+   */
+  function twoSum( numbers ,  target ) {
+    let obj = {}
+    for(let i=0;i<=numbers.length - 1;i++){
+      let number = numbers[i]
+      let needNumber = target - number
+      if(obj[needNumber] || obj[needNumber] === 0){
+        let result = [i+1, obj[needNumber]+1]
+        console.log("result1", result)
+
+        result.sort((a, b)=>a-b)
+        console.log("result2", result)
+
+        return result
+      } else{
+        obj[number] = i
+      }
+    }
+  }
+</script>
+</body>
+</html>

@@ -46,8 +46,8 @@
   console.log(getTwoNumberIndex([2,7, 11, 15], 9))
   console.log(getTwoNumberIndex([2,3,4], 99))
 
-  console.assert(JSON.stringify(getTwoNumberIndex([2,7, 11, 15], 9)) === JSON.stringify([1,2]))
-  console.assert(JSON.stringify(getTwoNumberIndex([2,3,4], 99)) === JSON.stringify([-1, -1]))
+  console.assert(JSON.stringify(test([2,7, 11, 15], 9)) === JSON.stringify([1,2]))
+  console.assert(JSON.stringify(test([2,3,4], 99)) === JSON.stringify([-1, -1]))
 
 
   function test(haveSortArray, target){
